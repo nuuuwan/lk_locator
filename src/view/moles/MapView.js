@@ -1,11 +1,23 @@
-import React from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import React, { useEffect, useRef } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Box } from "@mui/material";
+import LatLng from "../../nonview/base/LatLng";
 
-export default function MapView() {
-  // Center of Sri Lanka
-  const position = [7.8731, 80.7718];
+function MapCenterController({ latLng }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (latLng) {
+      map.setView(latLng.toArray(), map.getZoom());
+    }
+  }, [latLng, map]);
+
+  return null;
+}
+
+export default function MapView({ latLng = LatLng.DEFAULT }) {
+  const position = latLng.toArray();
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
@@ -18,6 +30,7 @@ export default function MapView() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <MapCenterController latLng={latLng} />
       </MapContainer>
     </Box>
   );
