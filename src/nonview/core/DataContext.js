@@ -46,10 +46,10 @@ export function DataProvider({ children }) {
       setProvince(null); // Set to null to indicate loading
       setDistrict(null);
 
-      const foundProvince = await Province.find(latLng);
+      const foundProvince = await Province.find(latLng, null);
       setProvince(foundProvince || undefined); // undefined = not found
 
-      const foundDistrict = await District.find(latLng);
+      const foundDistrict = await District.find(latLng, foundProvince);
       setDistrict(foundDistrict || undefined);
 
       // Load province geometry

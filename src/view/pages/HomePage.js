@@ -5,7 +5,7 @@ import DetailsView from "../moles/DetailsView";
 import { DataProvider, useData } from "../../nonview/core/DataContext";
 
 function HomePageContent() {
-  const { latLng, province, provinceGeo, onLatLngChange } = useData();
+  const { latLng } = useData();
 
   useEffect(() => {
     // Update document title when latLng changes
@@ -29,7 +29,7 @@ function HomePageContent() {
           width: "100%",
         }}
       >
-        <DetailsView latLng={latLng} province={province} />
+        <DetailsView />
       </Box>
 
       {/* Map - Bottom Half */}
@@ -39,11 +39,7 @@ function HomePageContent() {
           width: "100%",
         }}
       >
-        <MapView
-          latLng={latLng}
-          onLatLngChange={onLatLngChange}
-          provinceGeo={provinceGeo}
-        />
+        <MapView />
       </Box>
     </Box>
   );

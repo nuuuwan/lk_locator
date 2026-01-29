@@ -6,6 +6,7 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import MultiPolygonView from "../atoms/MultiPolygonView";
+import { useData } from "../../nonview/core/DataContext";
 
 function MapCenterController({ latLng }) {
   const map = useMap();
@@ -31,11 +32,8 @@ function MapEventHandler({ onLatLngChange }) {
   return null;
 }
 
-export default function MapView({
-  latLng = LatLng.DEFAULT,
-  onLatLngChange,
-  provinceGeo,
-}) {
+export default function MapView() {
+  const { latLng, onLatLngChange, provinceGeo } = useData();
   const position = latLng.toArray();
 
   const handleLocateClick = async () => {

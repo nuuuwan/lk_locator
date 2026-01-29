@@ -129,12 +129,24 @@ export default class AbstractRegion {
     return multiPolygon.isInside(latLng);
   }
 
-  static async find(latLng) {
+  isParent(parentRegion) {
+    if (!parentRegion) {
+      return false;
+    }
+    return this.id.startsWith(parentRegion.id);
+  }
+
+  static async find(latLng, parentRegion = null) {
     // Get all instances of this region type
     const regions = await this.listAll();
 
+    // Filter by parent region if provided
+    const filteredRegions = parentRegion
+      ? regions.filter((region) => region.isParent(parentRegion))
+      : regions;
+
     // Sort regions by distance to the latLng (closest first)
-    const sortedRegions = regions
+    const sortedRegions = filteredRegions
       .filter((region) => region.centerLatLng)
       .sort((a, b) => {
         const distA = a.centerLatLng.distance(latLng);

@@ -1,13 +1,11 @@
-import React from "react";
 import { Box, Paper } from "@mui/material";
 
-import LatLng from "../../nonview/base/LatLng";
+import { useData } from "../../nonview/core/DataContext";
 import RegionView from "./RegionView";
 
-export default function DetailsView({
-  latLng = LatLng.DEFAULT,
-  province = null,
-}) {
+export default function DetailsView() {
+  const { province } = useData();
+
   return (
     <Box
       sx={{
