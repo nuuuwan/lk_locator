@@ -49,6 +49,14 @@ export function DataProvider({ children }) {
       const foundProvince = await Province.find(latLng, null);
       setProvince(foundProvince || undefined); // undefined = not found
 
+      // Only find district if province was found
+      if (!foundProvince) {
+        setDistrict(undefined);
+        setProvinceGeo(null);
+        setDistrictGeo(null);
+        return;
+      }
+
       const foundDistrict = await District.find(latLng, foundProvince);
       setDistrict(foundDistrict || undefined);
 
