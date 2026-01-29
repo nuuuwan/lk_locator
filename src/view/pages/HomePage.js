@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import MapView from "../moles/MapView";
 import DetailsView from "../moles/DetailsView";
 import LatLng from "../../nonview/base/LatLng";
+import Province from "../../nonview/core/Province";
 
 export default function HomePage() {
   const { latlng } = useParams();
@@ -13,6 +14,8 @@ export default function HomePage() {
   const parsedLatLng = latlng ? LatLng.fromString(latlng) : null;
   const [latLng, setLatLng] = useState(parsedLatLng || LatLng.DEFAULT);
   const [initialized, setInitialized] = useState(!!parsedLatLng);
+  const [province, setProvince] = useState(null);
+  const [loadingProvince, setLoadingProvince] = useState(false);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -28,6 +31,18 @@ export default function HomePage() {
   useEffect(() => {
     // Update document title when latLng changes
     document.title = latLng.toString();
+  }, [latLng]);
+
+  useEffect(() => {
+    // Find province for the current latLng
+    const findProvince = async () => {
+      setLoadingProvince(true);
+      const foundProvince = await Province.find(latLng);
+      setProvince(foundProvince);
+      setLoadingProvince(false);
+    };
+
+    findProvince();
   }, [latLng]);
 
   const handleLatLngChange = (newLatLng) => {
@@ -62,7 +77,12 @@ export default function HomePage() {
           width: "100%",
         }}
       >
-        <DetailsView latLng={latLng} onLocate={handleLatLngChange} />
+        <DetailsView
+          latLng={latLng}
+          onLocate={handleLatLngChange}
+          province={province}
+          loadingProvince={loadingProvince}
+        />
       </Box>
     </Box>
   );
