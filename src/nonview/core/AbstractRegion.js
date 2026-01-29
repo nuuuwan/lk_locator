@@ -109,4 +109,9 @@ export default class AbstractRegion {
       return new MultiPolygon([]);
     }
   }
+
+  async isInside(latLng) {
+    const multiPolygon = await this.getGeo();
+    return multiPolygon.isInside(latLng);
+  }
 }
