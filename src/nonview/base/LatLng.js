@@ -37,4 +37,30 @@ export default class LatLng {
   static get DEFAULT() {
     return new LatLng(7.8731, 80.7718);
   }
+
+  // Get LatLng from browser geolocation
+  static async fromBrowserLocation() {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        resolve(LatLng.DEFAULT);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(
+            new LatLng(position.coords.latitude, position.coords.longitude),
+          );
+        },
+        () => {
+          // On error, fallback to default
+          resolve(LatLng.DEFAULT);
+        },
+        {
+          timeout: 5000,
+          maximumAge: 60000,
+        },
+      );
+    });
+  }
 }
