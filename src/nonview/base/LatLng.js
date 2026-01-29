@@ -33,6 +33,26 @@ export default class LatLng {
     return { lat: this.lat, lng: this.lng };
   }
 
+  // Calculate distance to another LatLng in kilometers using Haversine formula
+  distance(otherLatLng) {
+    const R = 6371; // Earth's radius in kilometers
+    const lat1 = (this.lat * Math.PI) / 180;
+    const lat2 = (otherLatLng.lat * Math.PI) / 180;
+    const deltaLat = ((otherLatLng.lat - this.lat) * Math.PI) / 180;
+    const deltaLng = ((otherLatLng.lng - this.lng) * Math.PI) / 180;
+
+    const a =
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(lat1) *
+        Math.cos(lat2) *
+        Math.sin(deltaLng / 2) *
+        Math.sin(deltaLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
+  }
+
   // Default center of Sri Lanka
   static get DEFAULT() {
     return new LatLng(7.8731, 80.7718);

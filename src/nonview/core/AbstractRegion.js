@@ -114,4 +114,29 @@ export default class AbstractRegion {
     const multiPolygon = await this.getGeo();
     return multiPolygon.isInside(latLng);
   }
+
+  static async find(latLng) {
+    // Get all instances of this region type
+    const regions = await this.listAll();
+
+    // Sort regions by distance to the latLng (closest first)
+    const sortedRegions = regions
+      .filter((region) => region.centerLatLng)
+      .sort((a, b) => {
+        const distA = a.centerLatLng.distance(latLng);
+        const distB = b.centerLatLng.distance(latLng);
+        return distA - distB;
+      });
+
+    // Check each region (in order of proximity) if the latLng is inside it
+    for (const region of sortedRegions) {
+      const isInside = await region.isInside(latLng);
+      if (isInside) {
+        return region;
+      }
+    }
+
+    // No match found
+    return null;
+  }
 }
