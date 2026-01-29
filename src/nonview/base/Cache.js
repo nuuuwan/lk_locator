@@ -32,10 +32,25 @@ export default class Cache {
     try {
       localStorage.setItem(cacheKey, JSON.stringify(data));
     } catch (error) {
-      console.error(
-        `[Cache] Error writing to localStorage for key ${cacheKey}:`,
-        error,
-      );
+      if (
+        error instanceof DOMException &&
+        error.name === "QuotaExceededError"
+      ) {
+        console.error(
+          `[Cache] Quota exceeded, clearing localStorage and retrying...`,
+        );
+        localStorage.clear();
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+        } catch (retryError) {
+          console.error(`[Cache] Failed to store after clearing:`, retryError);
+        }
+      } else {
+        console.error(
+          `[Cache] Error writing to localStorage for key ${cacheKey}:`,
+          error,
+        );
+      }
     }
   }
 
