@@ -28,6 +28,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Locator</title>
+    <script>
+      // GitHub Pages SPA redirect restoration
+      // This script checks for a redirect parameter and restores the route
+      (function() {
+        var query = window.location.search;
+        if (query) {
+          var match = query.match(/redirect=([^&]+)/);
+          if (match) {
+            var redirect = decodeURIComponent(match[1]);
+            window.history.replaceState(null, null, redirect);
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
