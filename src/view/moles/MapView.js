@@ -36,7 +36,7 @@ export default function MapView({ latLng = LatLng.DEFAULT, onLatLngChange }) {
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
       <MapContainer
         center={position}
-        zoom={8}
+        zoom={12}
         style={{ width: "100%", height: "100%" }}
       >
         <TileLayer
