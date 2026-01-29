@@ -3,8 +3,8 @@ import { Polygon } from "react-leaflet";
 
 export default function MultiPolygonView({
   multiPolygon,
-  color = "red",
-  fillOpacity = 0.1,
+  color = "black",
+  fillOpacity = 0.05,
 }) {
   if (
     !multiPolygon ||
