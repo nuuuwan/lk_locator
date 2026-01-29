@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Typography, Paper, Chip } from "@mui/material";
+import { Box, IconButton, Paper, Chip } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PlaceIcon from "@mui/icons-material/Place";
 import LatLng from "../../nonview/base/LatLng";
@@ -29,10 +29,6 @@ export default function DetailsView({ latLng = LatLng.DEFAULT }) {
           overflow: "auto",
         }}
       >
-        <Typography variant="h6" gutterBottom>
-          Location Details
-        </Typography>
-
         <Box sx={{ mb: 2 }}>
           <Chip
             icon={<PlaceIcon />}
@@ -41,25 +37,6 @@ export default function DetailsView({ latLng = LatLng.DEFAULT }) {
             variant="outlined"
             sx={{ fontSize: "1rem", padding: 1 }}
           />
-        </Box>
-
-        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-          <Box>
-            <Typography variant="caption" color="text.secondary">
-              Latitude
-            </Typography>
-            <Typography variant="body1" fontWeight="medium">
-              {latLng.lat.toFixed(6)}°
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="caption" color="text.secondary">
-              Longitude
-            </Typography>
-            <Typography variant="body1" fontWeight="medium">
-              {latLng.lng.toFixed(6)}°
-            </Typography>
-          </Box>
         </Box>
       </Paper>
 
