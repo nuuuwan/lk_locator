@@ -4,9 +4,12 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PlaceIcon from "@mui/icons-material/Place";
 import LatLng from "../../nonview/base/LatLng";
 
-export default function DetailsView({ latLng = LatLng.DEFAULT }) {
-  const handleLocateClick = () => {
-    // TODO: Implement locate functionality
+export default function DetailsView({ latLng = LatLng.DEFAULT, onLocate }) {
+  const handleLocateClick = async () => {
+    if (onLocate) {
+      const browserLatLng = await LatLng.fromBrowserLocation();
+      onLocate(browserLatLng);
+    }
   };
 
   return (
