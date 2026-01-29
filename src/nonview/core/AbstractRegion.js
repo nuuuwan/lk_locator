@@ -54,7 +54,10 @@ export default class AbstractRegion {
 
   static async listAll() {
     const regionShortName = this.regionShortName.toLowerCase();
-    const url = `https://raw.githubusercontent.com/nuuuwan/lk_admin_regions/refs/heads/main/data/ents/${regionShortName}s.json`;
+    const url =
+      `https://raw.githubusercontent.com` +
+      `/nuuuwan/lk_admin_regions/refs/heads/main` +
+      `/data/ents/${regionShortName}s.json`;
 
     try {
       const response = await fetch(url);
