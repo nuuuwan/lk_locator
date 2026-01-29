@@ -32,8 +32,11 @@ export default class MultiPolygon {
       const xj = polygon[j].lng;
       const yj = polygon[j].lat;
 
-      const intersect =
-        yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+      // eslint-disable-next-line no-mixed-operators
+      const intersectCondition1 = yi > y !== yj > y;
+
+      const intersectCondition2 = x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+      const intersect = intersectCondition1 && intersectCondition2;
 
       if (intersect) {
         inside = !inside;
