@@ -32,25 +32,8 @@ export default class Cache {
     try {
       localStorage.setItem(cacheKey, JSON.stringify(data));
     } catch (error) {
-      if (
-        error instanceof DOMException &&
-        error.name === "QuotaExceededError"
-      ) {
-        console.error(
-          `[Cache] Quota exceeded, clearing localStorage and retrying...`,
-        );
-        localStorage.clear();
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify(data));
-        } catch (retryError) {
-          console.error(`[Cache] Failed to store after clearing:`, retryError);
-        }
-      } else {
-        console.error(
-          `[Cache] Error writing to localStorage for key ${cacheKey}:`,
-          error,
-        );
-      }
+      console.error(`[Cache] ${cacheKey}: ${error}`);
+      localStorage.clear();
     }
   }
 
@@ -70,7 +53,6 @@ export default class Cache {
     }
 
     // Generate data using callback
-    console.debug(`[Cache] 🔴 Cache miss: ${cacheKey}`);
     const data = await callback();
 
     // Store in both caches
