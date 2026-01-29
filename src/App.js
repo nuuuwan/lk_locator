@@ -22,11 +22,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename="/lk_locator">
         <Routes>
-          <Route path="/lk_locator" element={<HomePage />} />
-          <Route path="/lk_locator/:latlng" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/:latlng" element={<HomePage />} />
         </Routes>
       </Router>
     </ThemeProvider>
