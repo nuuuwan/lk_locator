@@ -78,7 +78,6 @@ export default function HomePage() {
       >
         <DetailsView
           latLng={latLng}
-          onLocate={handleLatLngChange}
           province={province}
           loadingProvince={loadingProvince}
         />

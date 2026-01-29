@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import MultiPolygonView from "../atoms/MultiPolygonView";
@@ -37,6 +38,13 @@ export default function MapView({
 }) {
   const position = latLng.toArray();
 
+  const handleLocateClick = async () => {
+    if (onLatLngChange) {
+      const browserLatLng = await LatLng.fromBrowserLocation();
+      onLatLngChange(browserLatLng);
+    }
+  };
+
   return (
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
       <MapContainer
@@ -53,6 +61,28 @@ export default function MapView({
         {provinceGeo && <MultiPolygonView multiPolygon={provinceGeo} />}
       </MapContainer>
       <Crosshairs />
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 16,
+          right: 16,
+          zIndex: 2000,
+        }}
+      >
+        <IconButton
+          color="primary"
+          onClick={handleLocateClick}
+          sx={{
+            backgroundColor: "white",
+            boxShadow: 2,
+            "&:hover": {
+              backgroundColor: "grey.100",
+            },
+          }}
+        >
+          <MyLocationIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 }

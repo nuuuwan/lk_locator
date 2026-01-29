@@ -1,22 +1,13 @@
 import React from "react";
-import { Box, IconButton, Paper, Chip, Typography } from "@mui/material";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { Box, Paper, Chip, Typography } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import LatLng from "../../nonview/base/LatLng";
 
 export default function DetailsView({
   latLng = LatLng.DEFAULT,
-  onLocate,
   province = null,
   loadingProvince = false,
 }) {
-  const handleLocateClick = async () => {
-    if (onLocate) {
-      const browserLatLng = await LatLng.fromBrowserLocation();
-      onLocate(browserLatLng);
-    }
-  };
-
   return (
     <Box
       sx={{
@@ -73,28 +64,6 @@ export default function DetailsView({
           </Typography>
         )}
       </Paper>
-
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
-        }}
-      >
-        <IconButton
-          color="primary"
-          onClick={handleLocateClick}
-          sx={{
-            backgroundColor: "white",
-            boxShadow: 2,
-            "&:hover": {
-              backgroundColor: "grey.100",
-            },
-          }}
-        >
-          <MyLocationIcon />
-        </IconButton>
-      </Box>
     </Box>
   );
 }
