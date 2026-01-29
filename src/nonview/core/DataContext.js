@@ -62,15 +62,15 @@ export function DataProvider({ children }) {
         const foundDsd = await DSD.find(latLng, foundDistrict);
         setDsd(foundDsd);
 
-        // if (foundDsd) {
-        //   const foundGnd = await GND.find(latLng, foundDsd);
-        //   setGnd(foundGnd);
+        if (foundDsd) {
+          const foundGnd = await GND.find(latLng, foundDsd);
+          setGnd(foundGnd);
 
-        //   if (foundGnd) {
-        //     const geo = await foundGnd.getGeo();
-        //     setGndGeo(geo);
-        //   }
-        // }
+          if (foundGnd) {
+            const geo = await foundGnd.getGeo();
+            setGndGeo(geo);
+          }
+        }
 
         if (foundDsd) {
           const geo = await foundDsd.getGeo();

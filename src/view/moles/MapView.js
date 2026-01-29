@@ -33,7 +33,7 @@ function MapEventHandler({ onLatLngChange }) {
 }
 
 export default function MapView() {
-  const { latLng, onLatLngChange, provinceGeo, districtGeo, dsdGeo } =
+  const { latLng, onLatLngChange, provinceGeo, districtGeo, dsdGeo, gndGeo } =
     useData();
   const position = latLng.toArray();
 
@@ -61,6 +61,7 @@ export default function MapView() {
         <MultiPolygonView multiPolygon={provinceGeo} />
         <MultiPolygonView multiPolygon={districtGeo} />
         <MultiPolygonView multiPolygon={dsdGeo} />
+        <MultiPolygonView multiPolygon={gndGeo} />
       </MapContainer>
       <Crosshairs />
       <Box
