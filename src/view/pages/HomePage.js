@@ -16,6 +16,7 @@ export default function HomePage() {
   const [initialized, setInitialized] = useState(!!parsedLatLng);
   const [province, setProvince] = useState(null);
   const [loadingProvince, setLoadingProvince] = useState(false);
+  const [provinceGeo, setProvinceGeo] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -40,6 +41,14 @@ export default function HomePage() {
       const foundProvince = await Province.find(latLng);
       setProvince(foundProvince);
       setLoadingProvince(false);
+
+      // Load province geometry
+      if (foundProvince) {
+        const geo = await foundProvince.getGeo();
+        setProvinceGeo(geo);
+      } else {
+        setProvinceGeo(null);
+      }
     };
 
     findProvince();
@@ -82,7 +91,11 @@ export default function HomePage() {
           width: "100%",
         }}
       >
-        <MapView latLng={latLng} onLatLngChange={handleLatLngChange} />
+        <MapView
+          latLng={latLng}
+          onLatLngChange={handleLatLngChange}
+          provinceGeo={provinceGeo}
+        />
       </Box>
     </Box>
   );

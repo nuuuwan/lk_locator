@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { Box } from "@mui/material";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
+import MultiPolygonView from "../atoms/MultiPolygonView";
 
 function MapCenterController({ latLng }) {
   const map = useMap();
@@ -29,7 +30,11 @@ function MapEventHandler({ onLatLngChange }) {
   return null;
 }
 
-export default function MapView({ latLng = LatLng.DEFAULT, onLatLngChange }) {
+export default function MapView({
+  latLng = LatLng.DEFAULT,
+  onLatLngChange,
+  provinceGeo,
+}) {
   const position = latLng.toArray();
 
   return (
@@ -45,6 +50,7 @@ export default function MapView({ latLng = LatLng.DEFAULT, onLatLngChange }) {
         />
         <MapCenterController latLng={latLng} />
         {onLatLngChange && <MapEventHandler onLatLngChange={onLatLngChange} />}
+        {provinceGeo && <MultiPolygonView multiPolygon={provinceGeo} />}
       </MapContainer>
       <Crosshairs />
     </Box>

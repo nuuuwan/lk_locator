@@ -1,8 +1,16 @@
 import React from "react";
 import { Polygon } from "react-leaflet";
 
-export default function MultiPolygonView({ multiPolygon, color = "blue", fillOpacity = 0.2 }) {
-  if (!multiPolygon || !multiPolygon.polygons || multiPolygon.polygons.length === 0) {
+export default function MultiPolygonView({
+  multiPolygon,
+  color = "red",
+  fillOpacity = 0.1,
+}) {
+  if (
+    !multiPolygon ||
+    !multiPolygon.polygons ||
+    multiPolygon.polygons.length === 0
+  ) {
     return null;
   }
 
@@ -11,7 +19,7 @@ export default function MultiPolygonView({ multiPolygon, color = "blue", fillOpa
       {multiPolygon.polygons.map((polygon, index) => {
         // Convert LatLng objects to [lat, lng] arrays for Leaflet
         const positions = polygon.map((latLng) => [latLng.lat, latLng.lng]);
-        
+
         return (
           <Polygon
             key={index}
@@ -20,7 +28,7 @@ export default function MultiPolygonView({ multiPolygon, color = "blue", fillOpa
               color: color,
               fillColor: color,
               fillOpacity: fillOpacity,
-              weight: 2,
+              weight: 0,
             }}
           />
         );
