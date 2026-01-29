@@ -1,50 +1,42 @@
 import React from "react";
 import { Box } from "@mui/material";
 
+const color = "#000";
+const circles = [
+  { size: 100 },
+  { size: 48 },
+  { size: 12 }, // dot as filled circle
+];
+
 export default function Crosshairs() {
   return (
     <Box
       sx={{
         position: "absolute",
-        top: "50%",
         left: "50%",
+        top: "50%",
         transform: "translate(-50%, -50%)",
-        pointerEvents: "none",
         zIndex: 1000,
+        pointerEvents: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <Box
-        sx={{
-          width: "60px",
-          height: "60px",
-          position: "relative",
-        }}
-      >
-        {/* Horizontal line */}
+      {circles.map((circle, i) => (
         <Box
+          key={i}
           sx={{
             position: "absolute",
-            top: "50%",
-            left: 0,
-            right: 0,
-            height: "3px",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            transform: "translateY(-50%)",
+            width: circle.size,
+            height: circle.size,
+            borderRadius: "50%",
+            boxSizing: "border-box",
+            border: circle.size === 12 ? undefined : `2.5px solid ${color}`,
+            backgroundColor: circle.size === 12 ? color : undefined,
           }}
         />
-        {/* Vertical line */}
-        <Box
-          sx={{
-            position: "absolute",
-            left: "50%",
-            top: 0,
-            bottom: 0,
-            width: "3px",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            transform: "translateX(-50%)",
-          }}
-        />
-      </Box>
+      ))}
     </Box>
   );
 }
