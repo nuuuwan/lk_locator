@@ -1,6 +1,6 @@
 import { Paper, CircularProgress, Typography } from "@mui/material";
 
-export default function RegionView({ region, regionType = "Province" }) {
+export default function RegionView({ region, regionType }) {
   if (!region) {
     return <CircularProgress />;
   }
@@ -8,13 +8,11 @@ export default function RegionView({ region, regionType = "Province" }) {
   return (
     <Paper sx={{ m: 1, p: 1 }} elevation={3}>
       <Typography variant="caption" color="text.secondary">
-        {regionType}
+        {region.id}
       </Typography>
-      <Typography variant="body1" fontWeight="medium">
-        {region.name}
-      </Typography>
+      <Typography variant="body1">{region.name}</Typography>
       <Typography variant="caption" color="text.secondary">
-        {region.nameSi} • {region.nameTa}
+        {regionType}
       </Typography>
     </Paper>
   );
