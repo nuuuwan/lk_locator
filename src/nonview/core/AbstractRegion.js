@@ -10,12 +10,20 @@ export default class AbstractRegion {
     this.centerLatLng = centerLatLng;
   }
 
-  static get regionTypeName() {
-    throw new Error("regionTypeName must be implemented in subclass");
+  static get regionName() {
+    throw new Error("regionName must be implemented in subclass");
   }
 
-  get regionTypeName() {
-    return this.constructor.regionTypeName;
+  static get regionShortName() {
+    return this.regionName;
+  }
+
+  get regionName() {
+    return this.constructor.regionName;
+  }
+
+  get regionShortName() {
+    return this.constructor.regionShortName;
   }
 
   static fromObject(data) {
