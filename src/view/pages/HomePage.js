@@ -19,7 +19,7 @@ export default function HomePage() {
     if (!initialized) {
       LatLng.fromBrowserLocation().then((browserLatLng) => {
         setLatLng(browserLatLng);
-        navigate(`/locator/${browserLatLng.toString()}`, { replace: true });
+        navigate(`/lk_locator/${browserLatLng.toString()}`, { replace: true });
         setInitialized(true);
       });
     }
@@ -27,7 +27,7 @@ export default function HomePage() {
 
   const handleLatLngChange = (newLatLng) => {
     setLatLng(newLatLng);
-    navigate(`/locator/${newLatLng.toString()}`, { replace: true });
+    navigate(`/lk_locator/${newLatLng.toString()}`, { replace: true });
   };
 
   return (
