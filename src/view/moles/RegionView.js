@@ -6,7 +6,7 @@ export default function RegionView({ region }) {
   }
 
   return (
-    <Paper sx={{ m: 0.5, p: 0.5 }} elevation={3}>
+    <Paper sx={{ m: 0.5, p: 0.5, width: 240 }} elevation={3}>
       <Typography variant="body1">{region.name}</Typography>
       <Typography variant="caption" color="text.secondary">
         {region.regionName}
