@@ -3,7 +3,7 @@ import { Polygon } from "react-leaflet";
 
 export default function MultiPolygonView({
   multiPolygon,
-  color = "#04f",
+  color = "blue",
   fillOpacity = 0.15,
 }) {
   if (
@@ -28,7 +28,7 @@ export default function MultiPolygonView({
               color: color,
               fillColor: color,
               fillOpacity: fillOpacity,
-              weight: 0,
+              weight: 2,
             }}
           />
         );
