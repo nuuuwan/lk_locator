@@ -84,4 +84,30 @@ export default class AbstractRegion {
       centerLatLng: this.centerLatLng?.toObject(),
     };
   }
+
+  async getGeo() {
+    const regionShortName = this.constructor.regionShortName.toLowerCase();
+    const url =
+      `https://raw.githubusercontent.com` +
+      `/nuuuwan/lk_admin_regions/refs/heads/main` +
+      `/data/geo/json/smallestest/${regionShortName}s.json/${this.id}.json`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch geo data for ${this.name}: ${response.statusText}`,
+        );
+      }
+      const data = await response.json();
+      
+      // Convert array of array of [lat, lng] to array of array of LatLng objects
+      return data.map((polygon) =>
+        polygon.map(([lat, lng]) => new LatLng(lat, lng))
+      );
+    } catch (error) {
+      console.error(`Error fetching geo data for ${this.name}:`, error);
+      return [];
+    }
+  }
 }
