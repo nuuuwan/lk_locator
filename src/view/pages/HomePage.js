@@ -60,17 +60,7 @@ export default function HomePage() {
         overflow: "hidden",
       }}
     >
-      {/* Map - Top Half */}
-      <Box
-        sx={{
-          flex: 1,
-          width: "100%",
-        }}
-      >
-        <MapView latLng={latLng} onLatLngChange={handleLatLngChange} />
-      </Box>
-
-      {/* Details Display - Bottom Half */}
+      {/* Details Display - Top Half */}
       <Box
         sx={{
           flex: 1,
@@ -83,6 +73,16 @@ export default function HomePage() {
           province={province}
           loadingProvince={loadingProvince}
         />
+      </Box>
+
+      {/* Map - Bottom Half */}
+      <Box
+        sx={{
+          flex: 1,
+          width: "100%",
+        }}
+      >
+        <MapView latLng={latLng} onLatLngChange={handleLatLngChange} />
       </Box>
     </Box>
   );
