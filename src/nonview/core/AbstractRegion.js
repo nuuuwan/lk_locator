@@ -113,9 +113,6 @@ export default class AbstractRegion {
           );
         }
         const data = await response.json();
-        console.debug(
-          `[${this.regionName}] Loaded geo for ${this.name}: ${data.length} polygon(s)`,
-        );
         return data; // Return plain array data for caching
       } catch (error) {
         console.error(`Error fetching geo data for ${this.name}:`, error);
