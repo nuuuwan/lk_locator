@@ -13,7 +13,20 @@ export default class LatLng {
   }
 
   toString() {
-    return `${this.lat.toFixed(6)}, ${this.lng.toFixed(6)}`;
+    const latDir = this.lat >= 0 ? "N" : "S";
+    const lngDir = this.lng >= 0 ? "E" : "W";
+    return `${Math.abs(this.lat).toFixed(4)}${latDir},${Math.abs(this.lng).toFixed(4)}${lngDir}`;
+  }
+
+  static fromString(str) {
+    // Parse format like "7.8731N,80.7718E"
+    const match = str.match(/^([0-9.]+)([NS]),([0-9.]+)([EW])$/);
+    if (!match) {
+      return null;
+    }
+    const lat = parseFloat(match[1]) * (match[2] === "N" ? 1 : -1);
+    const lng = parseFloat(match[3]) * (match[4] === "E" ? 1 : -1);
+    return new LatLng(lat, lng);
   }
 
   toObject() {
