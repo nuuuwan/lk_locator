@@ -1,61 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
-import { useParams, useNavigate } from "react-router-dom";
 import MapView from "../moles/MapView";
 import DetailsView from "../moles/DetailsView";
-import LatLng from "../../nonview/base/LatLng";
-import Province from "../../nonview/core/Province";
+import { DataProvider, useData } from "../../nonview/core/DataContext";
 
-export default function HomePage() {
-  const { latlng } = useParams();
-  const navigate = useNavigate();
-
-  // Initialize latLng from URL params or use browser location
-  const parsedLatLng = latlng ? LatLng.fromString(latlng) : null;
-  const [latLng, setLatLng] = useState(parsedLatLng || LatLng.DEFAULT);
-  const [initialized, setInitialized] = useState(!!parsedLatLng);
-  const [province, setProvince] = useState(null);
-  const [provinceGeo, setProvinceGeo] = useState(null);
-
-  useEffect(() => {
-    // If no valid latlng from URL, get browser location
-    if (!initialized) {
-      LatLng.fromBrowserLocation().then((browserLatLng) => {
-        setLatLng(browserLatLng);
-        navigate(`/${browserLatLng.toString()}`, { replace: true });
-        setInitialized(true);
-      });
-    }
-  }, [initialized, navigate]);
+function HomePageContent() {
+  const { latLng, province, provinceGeo, onLatLngChange } = useData();
 
   useEffect(() => {
     // Update document title when latLng changes
     document.title = latLng.toString();
   }, [latLng]);
-
-  useEffect(() => {
-    // Find province for the current latLng
-    const findProvince = async () => {
-      setProvince(null); // Set to null to indicate loading
-      const foundProvince = await Province.find(latLng);
-      setProvince(foundProvince || undefined); // undefined = not found
-
-      // Load province geometry
-      if (foundProvince) {
-        const geo = await foundProvince.getGeo();
-        setProvinceGeo(geo);
-      } else {
-        setProvinceGeo(null);
-      }
-    };
-
-    findProvince();
-  }, [latLng]);
-
-  const handleLatLngChange = (newLatLng) => {
-    setLatLng(newLatLng);
-    navigate(`/${newLatLng.toString()}`, { replace: true });
-  };
 
   return (
     <Box
@@ -86,10 +41,18 @@ export default function HomePage() {
       >
         <MapView
           latLng={latLng}
-          onLatLngChange={handleLatLngChange}
+          onLatLngChange={onLatLngChange}
           provinceGeo={provinceGeo}
         />
       </Box>
     </Box>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <DataProvider>
+      <HomePageContent />
+    </DataProvider>
   );
 }
