@@ -1,4 +1,5 @@
 import LatLng from "../base/LatLng";
+import MultiPolygon from "../base/MultiPolygon";
 
 export default class AbstractRegion {
   constructor({ id, name, nameSi, nameTa, areaSqKm, centerLatLng }) {
@@ -101,13 +102,11 @@ export default class AbstractRegion {
       }
       const data = await response.json();
 
-      // Convert array of array of [lat, lng] to array of array of LatLng objects
-      return data.map((polygon) =>
-        polygon.map(([lat, lng]) => new LatLng(lat, lng)),
-      );
+      // Return a MultiPolygon object
+      return MultiPolygon.fromArray(data);
     } catch (error) {
       console.error(`Error fetching geo data for ${this.name}:`, error);
-      return [];
+      return new MultiPolygon([]);
     }
   }
 }
