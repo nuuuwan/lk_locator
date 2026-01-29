@@ -68,7 +68,9 @@ export default class AbstractRegion {
         );
       }
       const data = await response.json();
-      return data.map((item) => this.fromAPIObject(item));
+      const regions = data.map((item) => this.fromAPIObject(item));
+      console.debug(`[${this.regionName}] Loaded ${regions.length} regions`);
+      return regions;
     } catch (error) {
       console.error(`Error fetching ${this.regionName}s:`, error);
       return [];
@@ -103,7 +105,11 @@ export default class AbstractRegion {
       const data = await response.json();
 
       // Return a MultiPolygon object
-      return MultiPolygon.fromArray(data);
+      const multiPolygon = MultiPolygon.fromArray(data);
+      console.debug(
+        `[${this.regionName}] Loaded geo for ${this.name}: ${data.length} polygon(s)`,
+      );
+      return multiPolygon;
     } catch (error) {
       console.error(`Error fetching geo data for ${this.name}:`, error);
       return new MultiPolygon([]);
