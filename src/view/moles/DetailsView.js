@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Paper, Chip, Typography } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import LatLng from "../../nonview/base/LatLng";
+import RegionView from "./RegionView";
+import LocationNotFound from "../atoms/LocationNotFound";
 
 export default function DetailsView({
   latLng = LatLng.DEFAULT,
@@ -45,24 +47,10 @@ export default function DetailsView({
         )}
 
         {!loadingProvince && province && (
-          <Box sx={{ mt: 1 }}>
-            <Typography variant="subtitle2" color="text.secondary">
-              Province
-            </Typography>
-            <Typography variant="body1" fontWeight="medium">
-              {province.name}
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              {province.nameSi} • {province.nameTa}
-            </Typography>
-          </Box>
+          <RegionView region={province} regionType="Province" />
         )}
 
-        {!loadingProvince && !province && (
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            Location not found in any province
-          </Typography>
-        )}
+        {!loadingProvince && !province && <LocationNotFound />}
       </Paper>
     </Box>
   );
