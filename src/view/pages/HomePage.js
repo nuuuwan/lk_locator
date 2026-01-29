@@ -15,7 +15,6 @@ export default function HomePage() {
   const [latLng, setLatLng] = useState(parsedLatLng || LatLng.DEFAULT);
   const [initialized, setInitialized] = useState(!!parsedLatLng);
   const [province, setProvince] = useState(null);
-  const [loadingProvince, setLoadingProvince] = useState(false);
   const [provinceGeo, setProvinceGeo] = useState(null);
 
   useEffect(() => {
@@ -37,10 +36,9 @@ export default function HomePage() {
   useEffect(() => {
     // Find province for the current latLng
     const findProvince = async () => {
-      setLoadingProvince(true);
+      setProvince(null); // Set to null to indicate loading
       const foundProvince = await Province.find(latLng);
-      setProvince(foundProvince);
-      setLoadingProvince(false);
+      setProvince(foundProvince || undefined); // undefined = not found
 
       // Load province geometry
       if (foundProvince) {
@@ -76,11 +74,7 @@ export default function HomePage() {
           width: "100%",
         }}
       >
-        <DetailsView
-          latLng={latLng}
-          province={province}
-          loadingProvince={loadingProvince}
-        />
+        <DetailsView latLng={latLng} province={province} />
       </Box>
 
       {/* Map - Bottom Half */}

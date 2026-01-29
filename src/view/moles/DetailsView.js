@@ -8,8 +8,9 @@ import LocationNotFound from "../atoms/LocationNotFound";
 export default function DetailsView({
   latLng = LatLng.DEFAULT,
   province = null,
-  loadingProvince = false,
 }) {
+  const loadingProvince = province === null;
+
   return (
     <Box
       sx={{
