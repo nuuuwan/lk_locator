@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import MapView from "../moles/MapView";
@@ -9,12 +9,21 @@ export default function HomePage() {
   const { latlng } = useParams();
   const navigate = useNavigate();
 
-  // Initialize latLng from URL params or use default
-  const initialLatLng = latlng
-    ? LatLng.fromString(latlng) || LatLng.DEFAULT
-    : LatLng.DEFAULT;
+  // Initialize latLng from URL params or use browser location
+  const parsedLatLng = latlng ? LatLng.fromString(latlng) : null;
+  const [latLng, setLatLng] = useState(parsedLatLng || LatLng.DEFAULT);
+  const [initialized, setInitialized] = useState(!!parsedLatLng);
 
-  const [latLng, setLatLng] = useState(initialLatLng);
+  useEffect(() => {
+    // If no valid latlng from URL, get browser location
+    if (!initialized) {
+      LatLng.fromBrowserLocation().then((browserLatLng) => {
+        setLatLng(browserLatLng);
+        navigate(`/locator/${browserLatLng.toString()}`, { replace: true });
+        setInitialized(true);
+      });
+    }
+  }, [initialized, navigate]);
 
   const handleLatLngChange = (newLatLng) => {
     setLatLng(newLatLng);
@@ -48,7 +57,7 @@ export default function HomePage() {
           width: "100%",
         }}
       >
-        <DetailsView latLng={latLng} />
+        <DetailsView latLng={latLng} onLocate={handleLatLngChange} />
       </Box>
     </Box>
   );
