@@ -28,7 +28,7 @@ export default function MultiPolygonView({
               color: color,
               fillColor: color,
               fillOpacity: fillOpacity,
-              weight: 0,
+              weight: 2,
             }}
           />
         );

@@ -20,6 +20,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Space Mono", monospace',
+    fontSize: 12,
   },
 });
 
