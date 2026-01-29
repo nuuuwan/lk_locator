@@ -1,5 +1,6 @@
 import LatLng from "../base/LatLng";
 import MultiPolygon from "../base/MultiPolygon";
+import Cache from "../base/Cache";
 
 export default class AbstractRegion {
   constructor({ id, name, nameSi, nameTa, areaSqKm, centerLatLng }) {
@@ -55,26 +56,32 @@ export default class AbstractRegion {
 
   static async listAll() {
     const regionShortName = this.regionShortName.toLowerCase();
-    const url =
-      `https://raw.githubusercontent.com` +
-      `/nuuuwan/lk_admin_regions/refs/heads/main` +
-      `/data/ents/${regionShortName}s.json`;
+    const cacheKey = `regions:${regionShortName}s`;
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch ${this.regionName}s: ${response.statusText}`,
-        );
+    const cachedData = await Cache.get(cacheKey, async () => {
+      const url =
+        `https://raw.githubusercontent.com` +
+        `/nuuuwan/lk_admin_regions/refs/heads/main` +
+        `/data/ents/${regionShortName}s.json`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch ${this.regionName}s: ${response.statusText}`,
+          );
+        }
+        const data = await response.json();
+        console.debug(`[${this.regionName}] Loaded ${data.length} regions`);
+        return data; // Return plain data for caching
+      } catch (error) {
+        console.error(`Error fetching ${this.regionName}s:`, error);
+        return [];
       }
-      const data = await response.json();
-      const regions = data.map((item) => this.fromAPIObject(item));
-      console.debug(`[${this.regionName}] Loaded ${regions.length} regions`);
-      return regions;
-    } catch (error) {
-      console.error(`Error fetching ${this.regionName}s:`, error);
-      return [];
-    }
+    });
+
+    // Convert cached plain data to region instances
+    return cachedData.map((item) => this.fromAPIObject(item));
   }
 
   toObject() {
@@ -90,30 +97,34 @@ export default class AbstractRegion {
 
   async getGeo() {
     const regionShortName = this.constructor.regionShortName.toLowerCase();
-    const url =
-      `https://raw.githubusercontent.com` +
-      `/nuuuwan/lk_admin_regions/refs/heads/main` +
-      `/data/geo/json/smallestest/${regionShortName}s.json/${this.id}.json`;
+    const cacheKey = `geo:${regionShortName}:${this.id}`;
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch geo data for ${this.name}: ${response.statusText}`,
+    const cachedData = await Cache.get(cacheKey, async () => {
+      const url =
+        `https://raw.githubusercontent.com` +
+        `/nuuuwan/lk_admin_regions/refs/heads/main` +
+        `/data/geo/json/small/${regionShortName}s.json/${this.id}.json`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch geo data for ${this.name}: ${response.statusText}`,
+          );
+        }
+        const data = await response.json();
+        console.debug(
+          `[${this.regionName}] Loaded geo for ${this.name}: ${data.length} polygon(s)`,
         );
+        return data; // Return plain array data for caching
+      } catch (error) {
+        console.error(`Error fetching geo data for ${this.name}:`, error);
+        return [];
       }
-      const data = await response.json();
+    });
 
-      // Return a MultiPolygon object
-      const multiPolygon = MultiPolygon.fromArray(data);
-      console.debug(
-        `[${this.regionName}] Loaded geo for ${this.name}: ${data.length} polygon(s)`,
-      );
-      return multiPolygon;
-    } catch (error) {
-      console.error(`Error fetching geo data for ${this.name}:`, error);
-      return new MultiPolygon([]);
-    }
+    // Convert cached plain data to MultiPolygon instance
+    return MultiPolygon.fromArray(cachedData);
   }
 
   async isInside(latLng) {
