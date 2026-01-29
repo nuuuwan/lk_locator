@@ -1,10 +1,4 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import HomePage from "./view/pages/HomePage";
@@ -28,13 +22,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router basename="/lk_locator">
+      <BrowserRouter basename="/lk_locator">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/:latlng" element={<HomePage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
