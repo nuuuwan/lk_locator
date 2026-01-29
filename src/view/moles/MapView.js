@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Box } from "@mui/material";
 import LatLng from "../../nonview/base/LatLng";
+import Crosshairs from "../atoms/Crosshairs";
 
 function MapCenterController({ latLng }) {
   const map = useMap();
@@ -45,64 +46,7 @@ export default function MapView({ latLng = LatLng.DEFAULT, onLatLngChange }) {
         <MapCenterController latLng={latLng} />
         {onLatLngChange && <MapEventHandler onLatLngChange={onLatLngChange} />}
       </MapContainer>
-      {/* Crosshairs */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          pointerEvents: "none",
-          zIndex: 1000,
-        }}
-      >
-        <Box
-          sx={{
-            width: "40px",
-            height: "40px",
-            position: "relative",
-          }}
-        >
-          {/* Horizontal line */}
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: 0,
-              right: 0,
-              height: "2px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              transform: "translateY(-50%)",
-            }}
-          />
-          {/* Vertical line */}
-          <Box
-            sx={{
-              position: "absolute",
-              left: "50%",
-              top: 0,
-              bottom: 0,
-              width: "2px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              transform: "translateX(-50%)",
-            }}
-          />
-          {/* Center circle */}
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              width: "8px",
-              height: "8px",
-              border: "2px solid rgba(0, 0, 0, 0.5)",
-              borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-        </Box>
-      </Box>
+      <Crosshairs />
     </Box>
   );
 }
