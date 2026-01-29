@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Province from "./Province";
 import District from "./District";
+import DSD from "./DSD";
+import GND from "./GND";
 import LatLng from "../base/LatLng";
 
 const DataContext = createContext();
@@ -26,6 +28,10 @@ export function DataProvider({ children }) {
   const [provinceGeo, setProvinceGeo] = useState(null);
   const [district, setDistrict] = useState(null);
   const [districtGeo, setDistrictGeo] = useState(null);
+  const [dsd, setDsd] = useState(null);
+  const [dsdGeo, setDsdGeo] = useState(null);
+  const [gnd, setGnd] = useState(null);
+  const [gndGeo, setGndGeo] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -41,39 +47,45 @@ export function DataProvider({ children }) {
   useEffect(() => {
     if (!latLng) return;
 
-    // Find regions for the current latLng
     const findRegions = async () => {
-      setProvince(null); // Set to null to indicate loading
-      setDistrict(null);
-
       const foundProvince = await Province.find(latLng, null);
-      setProvince(foundProvince || undefined); // undefined = not found
+      setProvince(foundProvince);
 
-      // Only find district if province was found
       if (!foundProvince) {
-        setDistrict(undefined);
-        setProvinceGeo(null);
-        setDistrictGeo(null);
         return;
       }
 
       const foundDistrict = await District.find(latLng, foundProvince);
-      setDistrict(foundDistrict || undefined);
+      setDistrict(foundDistrict);
 
-      // Load province geometry
+      if (foundDistrict) {
+        const foundDsd = await DSD.find(latLng, foundDistrict);
+        setDsd(foundDsd);
+
+        // if (foundDsd) {
+        //   const foundGnd = await GND.find(latLng, foundDsd);
+        //   setGnd(foundGnd);
+
+        //   if (foundGnd) {
+        //     const geo = await foundGnd.getGeo();
+        //     setGndGeo(geo);
+        //   }
+        // }
+
+        if (foundDsd) {
+          const geo = await foundDsd.getGeo();
+          setDsdGeo(geo);
+        }
+      }
+
       if (foundProvince) {
         const geo = await foundProvince.getGeo();
         setProvinceGeo(geo);
-      } else {
-        setProvinceGeo(null);
       }
 
-      // Load district geometry
       if (foundDistrict) {
         const geo = await foundDistrict.getGeo();
         setDistrictGeo(geo);
-      } else {
-        setDistrictGeo(null);
       }
     };
 
@@ -91,6 +103,10 @@ export function DataProvider({ children }) {
     provinceGeo,
     district,
     districtGeo,
+    dsd,
+    dsdGeo,
+    gnd,
+    gndGeo,
     onLatLngChange: handleLatLngChange,
   };
 

@@ -4,7 +4,7 @@ import { useData } from "../../nonview/core/DataContext";
 import RegionView from "./RegionView";
 
 export default function DetailsView() {
-  const { province, district } = useData();
+  const { province, district, dsd } = useData();
 
   return (
     <Box
@@ -26,8 +26,9 @@ export default function DetailsView() {
           overflow: "auto",
         }}
       >
-        <RegionView region={province} regionType="Province" />
-        <RegionView region={district} regionType="District" />
+        <RegionView region={province} />
+        <RegionView region={district} />
+        <RegionView region={dsd} />
       </Paper>
     </Box>
   );
