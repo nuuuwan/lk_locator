@@ -13,33 +13,30 @@ function HomePageContent() {
   }, [latLng]);
 
   return (
-    <Box
-      sx={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-      }}
-    >
-      {/* Details Display - Top Half */}
+    <Box sx={{}}>
       <Box
         sx={{
-          flex: 1,
-          width: "100%",
-        }}
-      >
-        <DetailsView />
-      </Box>
-
-      {/* Map - Bottom Half */}
-      <Box
-        sx={{
-          flex: 1,
-          width: "100%",
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
         }}
       >
         <MapView />
+      </Box>
+
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: 240,
+          zIndex: 2000,
+        }}
+      >
+        <DetailsView />
       </Box>
     </Box>
   );

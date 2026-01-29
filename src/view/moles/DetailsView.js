@@ -1,10 +1,10 @@
-import { Box, Paper, Alert } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 
 import { useData } from "../../nonview/core/DataContext";
 import RegionView from "./RegionView";
 
 export default function DetailsView() {
-  const { province, district, dsd, gnd } = useData();
+  const { latLng, province, district, dsd, gnd } = useData();
 
   return (
     <Box
@@ -15,11 +15,12 @@ export default function DetailsView() {
         flexDirection: "column",
         position: "relative",
         p: 1,
+        opacity: 0.9,
       }}
     >
-      <Alert severity="info" sx={{ mt: 1, p: 1, textAlign: "center" }}>
-        Polling Divisions and Local Authorities data will be added soon.
-      </Alert>
+      <Paper sx={{ m: 0.5, p: 0.5 }} elevation={1}>
+        <Typography variant="body1">{latLng.toString()}</Typography>
+      </Paper>
       <RegionView region={province} />
       <RegionView region={district} />
       <RegionView region={dsd} />
