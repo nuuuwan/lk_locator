@@ -6,18 +6,19 @@ import DetailsView from "../moles/DetailsView";
 import LatLng from "../../nonview/base/LatLng";
 
 export default function HomePage() {
-  const { lat, lng } = useParams();
+  const { latlng } = useParams();
   const navigate = useNavigate();
 
   // Initialize latLng from URL params or use default
-  const initialLatLng =
-    lat && lng ? new LatLng(parseFloat(lat), parseFloat(lng)) : LatLng.DEFAULT;
+  const initialLatLng = latlng
+    ? LatLng.fromString(latlng) || LatLng.DEFAULT
+    : LatLng.DEFAULT;
 
   const [latLng, setLatLng] = useState(initialLatLng);
 
   const handleLatLngChange = (newLatLng) => {
     setLatLng(newLatLng);
-    navigate(`/locator/${newLatLng.lat}/${newLatLng.lng}`, { replace: true });
+    navigate(`/locator/${newLatLng.toString()}`, { replace: true });
   };
 
   return (
