@@ -13,6 +13,9 @@ const theme = createTheme({
       main: "#dc004e",
     },
   },
+  typography: {
+    fontFamily: '"Space Mono", monospace',
+  },
 });
 
 function App() {
