@@ -21,6 +21,8 @@ function App() {
       <CssBaseline />
       <Router>
         <Routes>
+          <Route path="/locator" element={<HomePage />} />
+          <Route path="/locator/:lat/:lng" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>
