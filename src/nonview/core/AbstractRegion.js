@@ -100,10 +100,10 @@ export default class AbstractRegion {
         );
       }
       const data = await response.json();
-      
+
       // Convert array of array of [lat, lng] to array of array of LatLng objects
       return data.map((polygon) =>
-        polygon.map(([lat, lng]) => new LatLng(lat, lng))
+        polygon.map(([lat, lng]) => new LatLng(lat, lng)),
       );
     } catch (error) {
       console.error(`Error fetching geo data for ${this.name}:`, error);
