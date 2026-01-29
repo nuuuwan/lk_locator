@@ -1,6 +1,7 @@
 import LatLng from "../base/LatLng";
 import MultiPolygon from "../base/MultiPolygon";
 import Cache from "../base/Cache";
+import WWW from "../base/WWW";
 
 export default class AbstractRegion {
   constructor({ id, name, nameSi, nameTa, areaSqKm, centerLatLng }) {
@@ -65,13 +66,7 @@ export default class AbstractRegion {
         `/data/ents/${regionShortName}s.json`;
 
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(
-            `Failed to fetch ${this.regionName}s: ${response.statusText}`,
-          );
-        }
-        const data = await response.json();
+        const data = await WWW.fetchJSON(url);
         console.debug(`[${this.regionName}] Loaded ${data.length} regions`);
         return data; // Return plain data for caching
       } catch (error) {
@@ -106,13 +101,7 @@ export default class AbstractRegion {
         `/data/geo/json/small/${regionShortName}s.json/${this.id}.json`;
 
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(
-            `Failed to fetch geo data for ${this.name}: ${response.statusText}`,
-          );
-        }
-        const data = await response.json();
+        const data = await WWW.fetchJSON(url);
         return data; // Return plain array data for caching
       } catch (error) {
         console.error(`Error fetching geo data for ${this.name}:`, error);
