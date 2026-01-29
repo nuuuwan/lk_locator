@@ -57,26 +57,23 @@ export default class AbstractRegion {
 
   static async listAll() {
     const regionShortName = this.regionShortName.toLowerCase();
-    const cacheKey = `regions:${regionShortName}s`;
 
-    const cachedData = await Cache.get(cacheKey, async () => {
-      const url =
-        `https://raw.githubusercontent.com` +
-        `/nuuuwan/lk_admin_regions/refs/heads/main` +
-        `/data/ents/${regionShortName}s.json`;
-
-      try {
-        const data = await WWW.fetchJSON(url);
-        console.debug(`[${this.regionName}] Loaded ${data.length} regions`);
-        return data; // Return plain data for caching
-      } catch (error) {
-        console.error(`Error fetching ${this.regionName}s:`, error);
-        return [];
-      }
-    });
-
-    // Convert cached plain data to region instances
-    return cachedData.map((item) => this.fromAPIObject(item));
+    const url =
+      `https://raw.githubusercontent.com` +
+      `/nuuuwan/lk_admin_regions/refs/heads/main` +
+      `/data/ents/${regionShortName}s.tsv`;
+    console.debug(url);
+    try {
+      const data = await WWW.fetchTSV(url);
+      console.debug(`[${this.regionName}] Loaded ${data.length} regions`);
+      console.debug(data[0]);
+      const regions = data.map((item) => this.fromAPIObject(item));
+      console.debug(regions[0]);
+      return regions;
+    } catch (error) {
+      console.error(`Error fetching ${this.regionName}s:`, error);
+      return [];
+    }
   }
 
   toObject() {
