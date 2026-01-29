@@ -9,7 +9,7 @@ export default class MultiPolygon {
   static fromArray(data) {
     // data is array of array of [lat, lng]
     const polygons = data.map((polygon) =>
-      polygon.map(([lat, lng]) => new LatLng(lat, lng)),
+      polygon.map(([lng, lat]) => new LatLng(lat, lng)),
     );
     return new MultiPolygon(polygons);
   }
