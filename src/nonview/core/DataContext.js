@@ -47,6 +47,16 @@ export function DataProvider({ children }) {
   useEffect(() => {
     if (!latLng) return;
 
+    // Reset all region states before searching
+    setProvince(null);
+    setProvinceGeo(null);
+    setDistrict(null);
+    setDistrictGeo(null);
+    setDsd(null);
+    setDsdGeo(null);
+    setGnd(null);
+    setGndGeo(null);
+
     const findRegions = async () => {
       const foundProvince = await Province.find(latLng, null);
       setProvince(foundProvince);
