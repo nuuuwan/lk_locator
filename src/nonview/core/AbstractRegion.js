@@ -62,13 +62,9 @@ export default class AbstractRegion {
       `https://raw.githubusercontent.com` +
       `/nuuuwan/lk_admin_regions/refs/heads/main` +
       `/data/ents/${regionShortName}s.tsv`;
-    console.debug(url);
     try {
       const data = await WWW.fetchTSV(url);
-      console.debug(`[${this.regionName}] Loaded ${data.length} regions`);
-      console.debug(data[0]);
       const regions = data.map((item) => this.fromAPIObject(item));
-      console.debug(regions[0]);
       return regions;
     } catch (error) {
       console.error(`Error fetching ${this.regionName}s:`, error);

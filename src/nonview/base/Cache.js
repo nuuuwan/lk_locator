@@ -55,7 +55,7 @@ export default class Cache {
     }
 
     // Generate data using callback
-    console.debug(`[Cache] ❌ Cache miss: ${cacheKey}, generating...`);
+    console.debug(`[Cache] 🔴 Cache miss: ${cacheKey}`);
     const data = await callback();
 
     // Store in both caches
