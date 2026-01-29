@@ -144,7 +144,7 @@ export default class AbstractRegion {
       }
     }
 
-    // No match found
-    return null;
+    // If no match is found, return the closest region.
+    return filteredRegions[0];
   }
 }
