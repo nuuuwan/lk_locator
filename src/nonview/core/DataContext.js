@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Province from "./Province";
+import District from "./District";
 import LatLng from "../base/LatLng";
 
 const DataContext = createContext();
@@ -23,6 +24,8 @@ export function DataProvider({ children }) {
   const [initialized, setInitialized] = useState(!!parsedLatLng);
   const [province, setProvince] = useState(null);
   const [provinceGeo, setProvinceGeo] = useState(null);
+  const [district, setDistrict] = useState(null);
+  const [districtGeo, setDistrictGeo] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -38,11 +41,16 @@ export function DataProvider({ children }) {
   useEffect(() => {
     if (!latLng) return;
 
-    // Find province for the current latLng
-    const findProvince = async () => {
+    // Find regions for the current latLng
+    const findRegions = async () => {
       setProvince(null); // Set to null to indicate loading
+      setDistrict(null);
+
       const foundProvince = await Province.find(latLng);
       setProvince(foundProvince || undefined); // undefined = not found
+
+      const foundDistrict = await District.find(latLng);
+      setDistrict(foundDistrict || undefined);
 
       // Load province geometry
       if (foundProvince) {
@@ -51,9 +59,17 @@ export function DataProvider({ children }) {
       } else {
         setProvinceGeo(null);
       }
+
+      // Load district geometry
+      if (foundDistrict) {
+        const geo = await foundDistrict.getGeo();
+        setDistrictGeo(geo);
+      } else {
+        setDistrictGeo(null);
+      }
     };
 
-    findProvince();
+    findRegions();
   }, [latLng]);
 
   const handleLatLngChange = (newLatLng) => {
@@ -65,6 +81,8 @@ export function DataProvider({ children }) {
     latLng,
     province,
     provinceGeo,
+    district,
+    districtGeo,
     onLatLngChange: handleLatLngChange,
   };
 
