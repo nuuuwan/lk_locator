@@ -25,6 +25,11 @@ export default function HomePage() {
     }
   }, [initialized, navigate]);
 
+  useEffect(() => {
+    // Update document title when latLng changes
+    document.title = latLng.toString();
+  }, [latLng]);
+
   const handleLatLngChange = (newLatLng) => {
     setLatLng(newLatLng);
     navigate(`/lk_locator/${newLatLng.toString()}`, { replace: true });
