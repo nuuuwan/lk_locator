@@ -1,16 +1,13 @@
 import React from "react";
-import { Box, Paper, Chip, Typography } from "@mui/material";
-import PlaceIcon from "@mui/icons-material/Place";
+import { Box, Paper } from "@mui/material";
+
 import LatLng from "../../nonview/base/LatLng";
 import RegionView from "./RegionView";
-import LocationNotFound from "../atoms/LocationNotFound";
 
 export default function DetailsView({
   latLng = LatLng.DEFAULT,
   province = null,
 }) {
-  const loadingProvince = province === null;
-
   return (
     <Box
       sx={{
@@ -31,27 +28,7 @@ export default function DetailsView({
           overflow: "auto",
         }}
       >
-        <Box sx={{ mb: 2 }}>
-          <Chip
-            icon={<PlaceIcon />}
-            label={latLng.toString()}
-            color="primary"
-            variant="outlined"
-            sx={{ fontSize: "1rem", padding: 1 }}
-          />
-        </Box>
-
-        {loadingProvince && (
-          <Typography variant="body2" color="text.secondary">
-            Loading location details...
-          </Typography>
-        )}
-
-        {!loadingProvince && province && (
-          <RegionView region={province} regionType="Province" />
-        )}
-
-        {!loadingProvince && !province && <LocationNotFound />}
+        <RegionView region={province} />
       </Paper>
     </Box>
   );

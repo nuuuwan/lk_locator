@@ -1,14 +1,13 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Paper, CircularProgress, Typography } from "@mui/material";
 
 export default function RegionView({ region, regionType = "Province" }) {
   if (!region) {
-    return null;
+    return <CircularProgress />;
   }
 
   return (
-    <Box sx={{ mt: 1 }}>
-      <Typography variant="subtitle2" color="text.secondary">
+    <Paper sx={{ m: 1, p: 1 }} elevation={3}>
+      <Typography variant="caption" color="text.secondary">
         {regionType}
       </Typography>
       <Typography variant="body1" fontWeight="medium">
@@ -17,6 +16,6 @@ export default function RegionView({ region, regionType = "Province" }) {
       <Typography variant="caption" color="text.secondary">
         {region.nameSi} • {region.nameTa}
       </Typography>
-    </Box>
+    </Paper>
   );
 }
