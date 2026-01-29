@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, Alert } from "@mui/material";
 
 import { useData } from "../../nonview/core/DataContext";
 import RegionView from "./RegionView";
@@ -14,23 +14,16 @@ export default function DetailsView() {
         display: "flex",
         flexDirection: "column",
         position: "relative",
+        p: 1,
       }}
     >
-      <Paper
-        elevation={2}
-        sx={{
-          flex: 1,
-          padding: 2,
-          display: "flex",
-          flexDirection: "column",
-          overflow: "auto",
-        }}
-      >
-        <RegionView region={province} />
-        <RegionView region={district} />
-        <RegionView region={dsd} />
-        <RegionView region={gnd} />
-      </Paper>
+      <Alert severity="info" sx={{ mt: 1, p: 1, textAlign: "center" }}>
+        Polling Divisions and Local Authorities data will be added soon.
+      </Alert>
+      <RegionView region={province} />
+      <RegionView region={district} />
+      <RegionView region={dsd} />
+      <RegionView region={gnd} />
     </Box>
   );
 }
