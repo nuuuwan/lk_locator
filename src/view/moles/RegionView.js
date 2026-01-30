@@ -1,10 +1,4 @@
-import {
-  Paper,
-  CircularProgress,
-  Typography,
-  ButtonBase,
-  Tooltip,
-} from "@mui/material";
+import { Paper, CircularProgress, Typography, ButtonBase } from "@mui/material";
 import { useData } from "../../nonview/core/DataContext";
 
 export default function RegionView({ region, regionClass, regionGeo }) {
