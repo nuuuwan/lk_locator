@@ -23,9 +23,9 @@ export default function CustomBottomNavigator() {
       // Check if browser location is within Sri Lanka bounds
       if (!browserLatLng.isWithinSriLankaBounds()) {
         // Use default Sri Lanka center if outside bounds
-        onLatLngChange(LatLng.DEFAULT, 14);
+        onLatLngChange(LatLng.DEFAULT);
       } else {
-        onLatLngChange(browserLatLng, 14);
+        onLatLngChange(browserLatLng);
       }
     }
   };
@@ -37,7 +37,7 @@ export default function CustomBottomNavigator() {
         const randomIndex = Math.floor(Math.random() * allGNDs.length);
         const randomGND = allGNDs[randomIndex];
         if (randomGND.centerLatLng) {
-          onLatLngChange(randomGND.centerLatLng, 14);
+          onLatLngChange(randomGND.centerLatLng);
         }
       }
     }

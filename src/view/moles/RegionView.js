@@ -5,10 +5,13 @@ import {
   ButtonBase,
   Tooltip,
 } from "@mui/material";
+import { useData } from "../../nonview/core/DataContext";
 
-export default function RegionView({ region, regionClass }) {
-  if (!region) {
-  }
+export default function RegionView({ region, regionClass, regionGeo }) {
+  const { selectedRegion, onRegionSelect } = useData();
+
+  const isSelected =
+    selectedRegion && region && seselectedRegion.region.id === region.id;
 
   const getFontSize = (text) => {
     if (!text) return "1.25rem";
@@ -21,10 +24,8 @@ export default function RegionView({ region, regionClass }) {
   };
 
   const handleClick = () => {
-    if (region) {
-      const query = `${region.name} ${regionClass.regionName}`;
-      const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-      window.open(url, "_blank");
+    if (region && regionGeo) {
+      onRegionSelect(region, regionGeo);
     }
   };
 
@@ -51,8 +52,14 @@ export default function RegionView({ region, regionClass }) {
         disabled={!region}
       >
         <Paper
-          sx={{ p: 0.5, width: "100%", transition: "all 0.2s" }}
-          elevation={1}
+          sx={{
+            p: 0.5,
+            width: "100%",
+            transition: "all 0.2s",
+            bgcolor: isSelected ? "primary.main" : "background.paper",
+            color: isSelected ? "primary.contrastText" : "text.primary",
+          }}
+          elevation={isSelected ? 3 : 1}
         >
           {region ? (
             <Typography

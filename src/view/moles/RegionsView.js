@@ -10,23 +10,44 @@ import PD from "../../nonview/core/PD";
 import LG from "../../nonview/core/LG";
 
 export default function RegionsView() {
-  const { province, district, dsd, gnd, ed, pd, lg } = useData();
+  const {
+    province,
+    provinceGeo,
+    district,
+    districtGeo,
+    dsd,
+    dsdGeo,
+    gnd,
+    gndGeo,
+    ed,
+    pd,
+    pdGeo,
+    lg,
+  } = useData();
   if (!province) {
     return <Alert severity="warning">Regions Unknown.</Alert>;
   }
   return (
     <Box>
       <Stack direction="row">
-        <RegionView region={province} regionClass={Province} />
-        <RegionView region={district} regionClass={District} />
+        <RegionView
+          region={province}
+          regionClass={Province}
+          regionGeo={provinceGeo}
+        />
+        <RegionView
+          region={district}
+          regionClass={District}
+          regionGeo={districtGeo}
+        />
       </Stack>
       <Stack direction="row">
-        <RegionView region={dsd} regionClass={DSD} />
-        <RegionView region={gnd} regionClass={GND} />
+        <RegionView region={dsd} regionClass={DSD} regionGeo={dsdGeo} />
+        <RegionView region={gnd} regionClass={GND} regionGeo={gndGeo} />
       </Stack>
       <Stack direction="row">
         <RegionView region={ed} regionClass={ED} />
-        <RegionView region={pd} regionClass={PD} />
+        <RegionView region={pd} regionClass={PD} regionGeo={pdGeo} />
       </Stack>
       <Stack direction="row">
         <RegionView region={lg} regionClass={LG} />

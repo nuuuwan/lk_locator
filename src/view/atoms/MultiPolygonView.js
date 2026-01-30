@@ -4,7 +4,7 @@ import { Polygon } from "react-leaflet";
 export default function MultiPolygonView({
   multiPolygon,
   geoData,
-  color = "blue",
+  color = "#1976d2",
   fillOpacity = 0.5,
 }) {
   // Support both prop names for backwards compatibility

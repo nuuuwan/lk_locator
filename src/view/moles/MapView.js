@@ -5,20 +5,24 @@ import { Box } from "@mui/material";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
+import MultiPolygonView from "../atoms/MultiPolygonView";
 
-function MapCenterController({ latLng, zoom, isProgrammaticUpdate }) {
+function MapCenterController({ latLng, zoom, isProgrammaticUpdate, prevZoomRef }) {
   const map = useMap();
 
   useEffect(() => {
     if (latLng) {
       isProgrammaticUpdate.current = true;
-      map.setView(latLng.toArray(), zoom);
+      // Only change zoom if it was explicitly set (different from previous)
+      const targetZoom = zoom !== prevZoomRef.current ? zoom : map.getZoom();
+      map.setView(latLng.toArray(), targetZoom);
+      prevZoomRef.current = zoom;
       // Reset flag after a short delay
       setTimeout(() => {
         isProgrammaticUpdate.current = false;
       }, 100);
     }
-  }, [latLng, zoom, map, isProgrammaticUpdate]);
+  }, [latLng, zoom, map, isProgrammaticUpdate, prevZoomRef]);
 
   return null;
 }
@@ -49,9 +53,10 @@ function MapEventHandler({ onLatLngChange, isProgrammaticUpdate }) {
 }
 
 export default function MapView() {
-  const { latLng, onLatLngChange, zoom } = useData();
+  const { latLng, onLatLngChange, zoom, selectedRegion } = useData();
   const position = latLng.toArray();
   const isProgrammaticUpdate = useRef(false);
+  const prevZoomRef = useRef(zoom);
 
   return (
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
@@ -69,12 +74,16 @@ export default function MapView() {
           latLng={latLng}
           zoom={zoom}
           isProgrammaticUpdate={isProgrammaticUpdate}
+          prevZoomRef={prevZoomRef}
         />
         {onLatLngChange && (
           <MapEventHandler
             onLatLngChange={onLatLngChange}
             isProgrammaticUpdate={isProgrammaticUpdate}
           />
+        )}
+        {selectedRegion?.regionGeo && (
+          <MultiPolygonView geoData={selectedRegion.regionGeo} />
         )}
       </MapContainer>
       <Crosshairs />

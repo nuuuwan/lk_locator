@@ -43,6 +43,7 @@ export function DataProvider({ children }) {
   const [ed, setEd] = useState(null);
   const [nominatimData, setNominatimData] = useState(null);
   const [zoom, setZoom] = useState(12);
+  const [selectedRegion, setSelectedRegion] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -158,6 +159,10 @@ export function DataProvider({ children }) {
     navigate(`/${newLatLng.toString()}`, { replace: true });
   };
 
+  const onRegionSelect = (region, regionGeo) => {
+    setSelectedRegion({ region, regionGeo });
+  };
+
   const value = {
     latLng,
     province,
@@ -175,7 +180,9 @@ export function DataProvider({ children }) {
     ed,
     nominatimData,
     zoom,
+    selectedRegion,
     onLatLngChange,
+    onRegionSelect,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
