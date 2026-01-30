@@ -58,8 +58,8 @@ function HomePageContent() {
           position: "fixed",
           top: 48,
           left: 0,
-          right: 0,
           height: "content-height",
+          width: "calc(min(100%, 400px))",
           zIndex: 2000,
         }}
       >
