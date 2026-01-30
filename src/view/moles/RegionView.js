@@ -30,57 +30,47 @@ export default function RegionView({ region, regionClass, regionGeo }) {
   };
 
   return (
-    <Tooltip title="Open Google Search" arrow>
-      <span>
-        <ButtonBase
-          onClick={handleClick}
-          sx={{
-            width: "calc(min(45vw, 180px))",
-            m: 0.5,
-            display: "block",
-            textAlign: "left",
-            borderRadius: 1,
-            transition: "all 0.2s ease-in-out",
-            "&:hover": {
-              transform: "scale(1.02)",
-              "& .MuiPaper-root": {
-                elevation: 4,
-                boxShadow: 4,
-                bgcolor: "primary.main",
-              },
-            },
-          }}
-          disabled={!region}
-        >
-          <Paper
-            sx={{
-              p: 0.5,
-              width: "100%",
-              transition: "all 0.2s",
-              bgcolor: isSelected ? "primary.main" : "primary.contrastText",
-              color: isSelected ? "primary.contrastText" : "black",
-            }}
-            elevation={isSelected ? 3 : 1}
-          >
-            {region ? (
-              <Typography
-                variant="h6"
-                sx={{ fontSize: getFontSize(region.name) }}
-              >
-                {region.name}
-              </Typography>
-            ) : (
-              <CircularProgress size={20} />
-            )}
-            <Typography
-              variant="body2"
-              sx={{ opacity: 0.7, fontSize: "0.75rem" }}
-            >
-              {regionClass.regionName}
-            </Typography>
-          </Paper>
-        </ButtonBase>
-      </span>
-    </Tooltip>
+    <ButtonBase
+      onClick={handleClick}
+      sx={{
+        width: "calc(min(45vw, 180px))",
+        m: 0.5,
+        display: "block",
+        textAlign: "left",
+        borderRadius: 1,
+        transition: "all 0.2s ease-in-out",
+        "&:hover": {
+          transform: "scale(1.02)",
+          "& .MuiPaper-root": {
+            elevation: 4,
+            boxShadow: 4,
+            bgcolor: "primary.main",
+          },
+        },
+      }}
+      disabled={!region}
+    >
+      <Paper
+        sx={{
+          p: 0.5,
+          width: "100%",
+          transition: "all 0.2s",
+          bgcolor: isSelected ? "primary.main" : "primary.contrastText",
+          color: isSelected ? "primary.contrastText" : "black",
+        }}
+        elevation={isSelected ? 3 : 1}
+      >
+        {region ? (
+          <Typography variant="h6" sx={{ fontSize: getFontSize(region.name) }}>
+            {region.name}
+          </Typography>
+        ) : (
+          <CircularProgress size={20} />
+        )}
+        <Typography variant="body2" sx={{ opacity: 0.7, fontSize: "0.75rem" }}>
+          {regionClass.regionName}
+        </Typography>
+      </Paper>
+    </ButtonBase>
   );
 }
