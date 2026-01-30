@@ -1,11 +1,8 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import { useData } from "../../nonview/core/DataContext";
 import RegionsView from "./RegionsView";
 
 export default function DetailsView() {
-  const { latLng } = useData();
-
   return (
     <Box
       sx={{
