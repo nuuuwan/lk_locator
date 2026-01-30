@@ -1,4 +1,4 @@
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Alert } from "@mui/material";
 import RegionView from "./RegionView";
 import { useData } from "../../nonview/core/DataContext";
 export default function RegionsView() {
