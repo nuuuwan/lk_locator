@@ -11,5 +11,4 @@ Just drag anywhere on the map to instantly see the corresponding:
  • Polling Division
  • Local Authority
 
-👉 Try it here:
 <https://nuuuwan.github.io/lk_locator/>
