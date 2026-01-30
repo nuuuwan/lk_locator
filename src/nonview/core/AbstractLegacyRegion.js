@@ -22,4 +22,13 @@ export default class AbstractLegacyRegion extends AbstractRegion {
       `/nuuuwan/gig-data/refs/heads/master/ents/${regionShortName}.tsv`
     );
   }
+
+  get geoUrl() {
+    const regionShortName = this.constructor.regionShortName.toLowerCase();
+    return (
+      `https://raw.githubusercontent.com` +
+      `/nuuuwan/gig-data/refs/heads/master` +
+      `/geo/${regionShortName}/${this.id}.json`
+    );
+  }
 }

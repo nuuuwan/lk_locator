@@ -86,16 +86,22 @@ export default class AbstractRegion {
     return regionsIdx[id] || null;
   }
 
+  get geoUrl() {
+    const regionShortName = this.constructor.regionShortName.toLowerCase();
+
+    return (
+      `https://raw.githubusercontent.com` +
+      `/nuuuwan/lk_admin_regions/refs/heads/main` +
+      `/data/geo/json/small/${regionShortName}s.json/${this.id}.json`
+    );
+  }
+
   async getGeo() {
     const regionShortName = this.constructor.regionShortName.toLowerCase();
     const cacheKey = `geo:${regionShortName}:${this.id}`;
 
     const cachedData = await Cache.get(cacheKey, async () => {
-      const url =
-        `https://raw.githubusercontent.com` +
-        `/nuuuwan/lk_admin_regions/refs/heads/main` +
-        `/data/geo/json/small/${regionShortName}s.json/${this.id}.json`;
-
+      const url = this.geoUrl;
       try {
         const data = await WWW.fetchJSON(url);
         return data; // Return plain array data for caching
