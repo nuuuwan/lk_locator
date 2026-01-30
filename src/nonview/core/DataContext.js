@@ -4,6 +4,7 @@ import Province from "./Province";
 import District from "./District";
 import DSD from "./DSD";
 import GND from "./GND";
+import PD from "./PD";
 import LatLng from "../base/LatLng";
 
 const DataContext = createContext();
@@ -32,6 +33,8 @@ export function DataProvider({ children }) {
   const [dsdGeo, setDsdGeo] = useState(null);
   const [gnd, setGnd] = useState(null);
   const [gndGeo, setGndGeo] = useState(null);
+  const [gndLegacyData, setGndLegacyData] = useState(null);
+  const [pd, setPd] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -56,53 +59,65 @@ export function DataProvider({ children }) {
     setDsdGeo(null);
     setGnd(null);
     setGndGeo(null);
+    setGndLegacyData(null);
+    setPd(null);
 
     const findRegions = async () => {
+      // Province
       const foundProvince = await Province.find(latLng, null);
-      setProvince(foundProvince);
-
       if (!foundProvince) {
         return;
       }
+      setProvince(foundProvince);
+      const provinceGeo = await foundProvince.getGeo();
+      setProvinceGeo(provinceGeo);
 
+      // District
       const foundDistrict = await District.find(latLng, foundProvince);
+      if (!foundDistrict) {
+        return;
+      }
       setDistrict(foundDistrict);
+      const districtGeo = await foundDistrict.getGeo();
+      setDistrictGeo(districtGeo);
 
-      if (foundDistrict) {
-        const foundDsd = await DSD.find(latLng, foundDistrict);
-        setDsd(foundDsd);
-
-        if (foundDsd) {
-          const foundGnd = await GND.find(latLng, foundDsd);
-          setGnd(foundGnd);
-
-          if (foundGnd) {
-            const geo = await foundGnd.getGeo();
-            setGndGeo(geo);
-          }
-        }
-
-        if (foundDsd) {
-          const geo = await foundDsd.getGeo();
-          setDsdGeo(geo);
-        }
+      // DSD
+      const foundDsd = await DSD.find(latLng, foundDistrict);
+      if (!foundDsd) {
+        return;
       }
+      setDsd(foundDsd);
+      const dsdGeo = await foundDsd.getGeo();
+      setDsdGeo(dsdGeo);
 
-      if (foundProvince) {
-        const geo = await foundProvince.getGeo();
-        setProvinceGeo(geo);
+      // GND
+      const foundGnd = await GND.find(latLng, foundDsd);
+      if (!foundGnd) {
+        return;
       }
+      setGnd(foundGnd);
+      const gndGeo = await foundGnd.getGeo();
+      setGndGeo(gndGeo);
 
-      if (foundDistrict) {
-        const geo = await foundDistrict.getGeo();
-        setDistrictGeo(geo);
+      const gndLegacyData = await foundGnd.getLegacyData();
+      if (!gndLegacyData) {
+        return;
+      }
+      setGndLegacyData(gndLegacyData);
+
+      // PD
+      const pdID = gndLegacyData.pd_id;
+      console.debug({ pdID });
+      const foundPd = await PD.fromID(pdID);
+      if (foundPd) {
+        setPd(foundPd);
       }
     };
 
     findRegions();
   }, [latLng]);
 
-  const handleLatLngChange = (newLatLng) => {
+  const onLatLngChange = (newLatLng) => {
     setLatLng(newLatLng);
     navigate(`/${newLatLng.toString()}`, { replace: true });
   };
@@ -117,7 +132,9 @@ export function DataProvider({ children }) {
     dsdGeo,
     gnd,
     gndGeo,
-    onLatLngChange: handleLatLngChange,
+    gndLegacyData,
+    pd,
+    onLatLngChange,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
