@@ -14,7 +14,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Fira Sans", sans-serif',
-    fontSize: 10,
+    fontSize: 12,
   },
 });
 

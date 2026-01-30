@@ -6,10 +6,13 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MenuIcon from "@mui/icons-material/Menu";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 export default function CustomAppBar({ latLng }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,6 +28,11 @@ export default function CustomAppBar({ latLng }) {
   const handleGitHubClick = () => {
     window.open("https://github.com/nuuuwan/lk_locator", "_blank");
     handleMenuClose();
+  };
+
+  const handleRefreshClick = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   return (
@@ -57,8 +65,16 @@ export default function CustomAppBar({ latLng }) {
           sx={{ zIndex: 4000 }}
         >
           <MenuItem onClick={handleGitHubClick}>
-            <GitHubIcon sx={{ mr: 1 }} />
-            GitHub Repository
+            <ListItemIcon>
+              <GitHubIcon />
+            </ListItemIcon>
+            <ListItemText>GitHub Repository</ListItemText>
+          </MenuItem>
+          <MenuItem onClick={handleRefreshClick}>
+            <ListItemIcon>
+              <RefreshIcon />
+            </ListItemIcon>
+            <ListItemText>Refresh App</ListItemText>
           </MenuItem>
         </Menu>
       </Toolbar>
