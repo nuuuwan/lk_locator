@@ -51,9 +51,9 @@ export default function CustomBottomNavigator() {
     if (newValue === 0) {
       handleRandomClick();
     } else if (newValue === 1) {
-      handleLocateClick();
-    } else if (newValue === 2) {
       handleGoogleMapsClick();
+    } else if (newValue === 2) {
+      handleLocateClick();
     }
   };
 
@@ -76,8 +76,8 @@ export default function CustomBottomNavigator() {
       }}
     >
       <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
-      <BottomNavigationAction icon={<MyLocationIcon sx={{ fontSize: 20 }} />} />
       <BottomNavigationAction icon={<MapIcon sx={{ fontSize: 20 }} />} />
+      <BottomNavigationAction icon={<MyLocationIcon sx={{ fontSize: 20 }} />} />
     </BottomNavigation>
   );
 }
