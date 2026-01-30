@@ -46,7 +46,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
               "& .MuiPaper-root": {
                 elevation: 4,
                 boxShadow: 4,
-                bgcolor: "action.hover",
+                bgcolor: "primary.main",
               },
             },
           }}
@@ -57,8 +57,8 @@ export default function RegionView({ region, regionClass, regionGeo }) {
               p: 0.5,
               width: "100%",
               transition: "all 0.2s",
-              bgcolor: isSelected ? "primary.main" : "background.paper",
-              color: isSelected ? "primary.contrastText" : "text.primary",
+              bgcolor: isSelected ? "primary.main" : "primary.contrastText",
+              color: isSelected ? "primary.contrastText" : "black",
             }}
             elevation={isSelected ? 3 : 1}
           >
@@ -72,7 +72,10 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             ) : (
               <CircularProgress size={20} />
             )}
-            <Typography variant="body2" sx={{ opacity: 0.7 }}>
+            <Typography
+              variant="body2"
+              sx={{ opacity: 0.7, fontSize: "0.75rem" }}
+            >
               {regionClass.regionName}
             </Typography>
           </Paper>
