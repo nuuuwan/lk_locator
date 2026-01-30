@@ -7,7 +7,12 @@ import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
 import MultiPolygonView from "../atoms/MultiPolygonView";
 
-function MapCenterController({ latLng, zoom, isProgrammaticUpdate, prevZoomRef }) {
+function MapCenterController({
+  latLng,
+  zoom,
+  isProgrammaticUpdate,
+  prevZoomRef,
+}) {
   const map = useMap();
 
   useEffect(() => {
