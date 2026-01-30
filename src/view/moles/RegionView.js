@@ -16,7 +16,7 @@ export default function RegionView({ region }) {
       <Typography variant="body1">{region.name}</Typography>
       <Stack direction="row" spacing={0}>
         <Typography variant="caption" color="text.secondary">
-          {region.regionName} ·{region.id}
+          {region.regionName} · {region.id}
         </Typography>
       </Stack>
     </Paper>

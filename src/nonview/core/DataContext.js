@@ -113,6 +113,13 @@ export function DataProvider({ children }) {
       }
       setGndLegacyData(gndLegacyData);
 
+      // ED
+      const edID = gndLegacyData.ed_id;
+      const foundEd = await ED.fromID(edID);
+      if (foundEd) {
+        setEd(foundEd);
+      }
+
       // PD
       const pdID = gndLegacyData.pd_id;
       const foundPd = await PD.fromID(pdID);
@@ -127,13 +134,6 @@ export function DataProvider({ children }) {
       const foundLg = await LG.fromID(lgID);
       if (foundLg) {
         setLg(foundLg);
-      }
-
-      // ED
-      const edID = gndLegacyData.ed_id;
-      const foundEd = await ED.fromID(edID);
-      if (foundEd) {
-        setEd(foundEd);
       }
     };
 
