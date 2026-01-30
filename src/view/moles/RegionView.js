@@ -72,7 +72,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             ) : (
               <CircularProgress size={20} />
             )}
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" sx={{ opacity: 0.7 }}>
               {regionClass.regionName}
             </Typography>
           </Paper>
