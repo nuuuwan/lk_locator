@@ -25,11 +25,19 @@ function HomePageContent() {
         onClose={handleCloseInstructions}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseInstructions} severity="info" sx={{ mt: 2 }}>
-          Drag to anywhere on the map to see which provinces, districts,
-          divisional secretariats, grama niladhari divisions, electoral
-          districts, polling divisions and local authorities in Sri Lanka the
-          location belongs to.
+        <Alert onClose={handleCloseInstructions} severity="info" sx={{ m: 1 }}>
+          <p>
+            Just drag anywhere on the map to instantly see the corresponding:
+          </p>
+          <ul>
+            <li>Province</li>
+            <li>District</li>
+            <li>Divisional Secretariat Division</li>
+            <li>Grama Niladhari Division</li>
+            <li>Electoral District</li>
+            <li>Polling Division</li>
+            <li>Local Authority</li>
+          </ul>
         </Alert>
       </Snackbar>
 
