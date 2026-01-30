@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Figtree", sans-serif',
+    fontFamily: '"Fira Sans", sans-serif',
     fontSize: 10,
   },
 });

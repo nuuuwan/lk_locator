@@ -54,6 +54,7 @@ export default function CustomAppBar({ latLng }) {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
+          sx={{ zIndex: 4000 }}
         >
           <MenuItem onClick={handleGitHubClick}>
             <GitHubIcon sx={{ mr: 1 }} />
