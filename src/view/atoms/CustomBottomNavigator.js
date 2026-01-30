@@ -3,12 +3,13 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CasinoIcon from "@mui/icons-material/Casino";
 import GoogleIcon from "@mui/icons-material/Google";
+import ArticleIcon from "@mui/icons-material/Article";
 import { useData } from "../../nonview/core/DataContext";
 import LatLng from "../../nonview/base/LatLng";
 import GND from "../../nonview/core/GND";
 
 export default function CustomBottomNavigator() {
-  const { latLng, onLatLngChange } = useData();
+  const { latLng, gnd, onLatLngChange } = useData();
   const [value, setValue] = useState(null);
 
   const handleLocateClick = async () => {
@@ -45,6 +46,14 @@ export default function CustomBottomNavigator() {
     }
   };
 
+  const handleWikipediaClick = () => {
+    if (gnd && gnd.name) {
+      const searchQuery = encodeURIComponent(gnd.name);
+      const url = `https://en.wikipedia.org/wiki/Special:Search?search=${searchQuery}`;
+      window.open(url, "_blank");
+    }
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
@@ -53,6 +62,8 @@ export default function CustomBottomNavigator() {
       handleRandomClick();
     } else if (newValue === 2) {
       handleGoogleMapsClick();
+    } else if (newValue === 3) {
+      handleWikipediaClick();
     }
   };
 
@@ -77,6 +88,7 @@ export default function CustomBottomNavigator() {
       <BottomNavigationAction icon={<MyLocationIcon sx={{ fontSize: 20 }} />} />
       <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
       <BottomNavigationAction icon={<GoogleIcon sx={{ fontSize: 20 }} />} />
+      <BottomNavigationAction icon={<ArticleIcon sx={{ fontSize: 20 }} />} />
     </BottomNavigation>
   );
 }
