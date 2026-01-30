@@ -5,7 +5,6 @@ import { Box, IconButton } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
-import MultiPolygonView from "../atoms/MultiPolygonView";
 import { useData } from "../../nonview/core/DataContext";
 
 function MapCenterController({ latLng }) {
@@ -33,15 +32,7 @@ function MapEventHandler({ onLatLngChange }) {
 }
 
 export default function MapView() {
-  const {
-    latLng,
-    onLatLngChange,
-    provinceGeo,
-    districtGeo,
-    dsdGeo,
-    gndGeo,
-    pdGeo,
-  } = useData();
+  const { latLng, onLatLngChange } = useData();
   const position = latLng.toArray();
 
   const handleLocateClick = async () => {
