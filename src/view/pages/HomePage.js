@@ -3,6 +3,7 @@ import { Box, Snackbar, Alert } from "@mui/material";
 import MapView from "../moles/MapView";
 import DetailsView from "../moles/DetailsView";
 import CustomAppBar from "../atoms/CustomAppBar";
+import CustomBottomNavigator from "../atoms/CustomBottomNavigator";
 import { DataProvider, useData } from "../../nonview/core/DataContext";
 
 function HomePageContent() {
@@ -20,7 +21,7 @@ function HomePageContent() {
 
   return (
     <Box sx={{}}>
-      <CustomAppBar />
+      <CustomAppBar latLng={latLng} />
       <Snackbar
         open={showInstructions}
         autoHideDuration={8_000}
@@ -47,7 +48,7 @@ function HomePageContent() {
         sx={{
           position: "fixed",
           top: 48,
-          bottom: 0,
+          bottom: 80,
           left: 0,
           right: 0,
           zIndex: 1000,
@@ -68,6 +69,7 @@ function HomePageContent() {
       >
         <DetailsView />
       </Box>
+      <CustomBottomNavigator />
     </Box>
   );
 }

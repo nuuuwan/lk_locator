@@ -1,13 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Box, IconButton } from "@mui/material";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import CasinoIcon from "@mui/icons-material/Casino";
+import { Box } from "@mui/material";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
-import GND from "../../nonview/core/GND";
 
 function MapCenterController({ latLng, isProgrammaticUpdate }) {
   const map = useMap();
@@ -56,33 +53,6 @@ export default function MapView() {
   const position = latLng.toArray();
   const isProgrammaticUpdate = useRef(false);
 
-  const handleLocateClick = async () => {
-    if (onLatLngChange) {
-      const browserLatLng = await LatLng.fromBrowserLocation();
-
-      // Check if browser location is within Sri Lanka bounds
-      if (!browserLatLng.isWithinSriLankaBounds()) {
-        // Use default Sri Lanka center if outside bounds
-        onLatLngChange(LatLng.DEFAULT);
-      } else {
-        onLatLngChange(browserLatLng);
-      }
-    }
-  };
-
-  const handleRandomClick = async () => {
-    if (onLatLngChange) {
-      const allGNDs = await GND.listAll();
-      if (allGNDs.length > 0) {
-        const randomIndex = Math.floor(Math.random() * allGNDs.length);
-        const randomGND = allGNDs[randomIndex];
-        if (randomGND.centerLatLng) {
-          onLatLngChange(randomGND.centerLatLng);
-        }
-      }
-    }
-  };
-
   return (
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
       <MapContainer
@@ -107,44 +77,6 @@ export default function MapView() {
         )}
       </MapContainer>
       <Crosshairs />
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
-          zIndex: 2000,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-        }}
-      >
-        <IconButton
-          color="primary"
-          onClick={handleLocateClick}
-          sx={{
-            backgroundColor: "white",
-            boxShadow: 2,
-            "&:hover": {
-              backgroundColor: "grey.100",
-            },
-          }}
-        >
-          <MyLocationIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          onClick={handleRandomClick}
-          sx={{
-            backgroundColor: "white",
-            boxShadow: 2,
-            "&:hover": {
-              backgroundColor: "grey.100",
-            },
-          }}
-        >
-          <CasinoIcon />
-        </IconButton>
-      </Box>
     </Box>
   );
 }

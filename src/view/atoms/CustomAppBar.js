@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function CustomAppBar() {
+export default function CustomAppBar({ latLng }) {
   return (
     <AppBar
       position="static"
@@ -14,7 +14,7 @@ export default function CustomAppBar() {
       <Toolbar sx={{ minHeight: 48 }}>
         <LocationOnIcon sx={{ mr: 1 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          LK Locator
+          {latLng ? latLng.toString() : "LK Locator"}
         </Typography>
       </Toolbar>
     </AppBar>
