@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Fira Sans", sans-serif',
+    fontFamily: '"Ubuntu", sans-serif',
     fontSize: 12,
   },
 });
