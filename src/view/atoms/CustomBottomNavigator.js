@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Tooltip,
+} from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CasinoIcon from "@mui/icons-material/Casino";
 import MapIcon from "@mui/icons-material/Map";

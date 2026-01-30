@@ -34,7 +34,7 @@ function HomePageContent() {
           severity="info"
           sx={{ mb: 10 }}
         >
-          Just drag anywhere on the map to instantly see the corresponding: •
+          Just drag anywhere on the map to instantly see the corresponding:
           Province, District, Divisional Secretariat Division, Grama Niladhari
           Division, Electoral District, Polling Division, or Local Authority
         </Alert>
