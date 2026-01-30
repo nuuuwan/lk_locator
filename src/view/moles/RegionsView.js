@@ -4,13 +4,7 @@ import { useData } from "../../nonview/core/DataContext";
 export default function RegionsView() {
   const { province, district, dsd, gnd, ed, pd, lg } = useData();
   if (!province) {
-    return (
-      <Alert severity="info">
-        <Typography variant="body1">
-          No region data available for the current location.
-        </Typography>
-      </Alert>
-    );
+    return <Alert severity="warning">Regions Unknown.</Alert>;
   }
   return (
     <Box>
