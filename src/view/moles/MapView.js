@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
+import MultiPolygonView from "../atoms/MultiPolygonView";
 
 function MapCenterController({ latLng, isProgrammaticUpdate }) {
   const map = useMap();
@@ -49,7 +50,7 @@ function MapEventHandler({ onLatLngChange, isProgrammaticUpdate }) {
 }
 
 export default function MapView() {
-  const { latLng, onLatLngChange } = useData();
+  const { latLng, onLatLngChange, gnd, gndGeo } = useData();
   const position = latLng.toArray();
   const isProgrammaticUpdate = useRef(false);
 
@@ -75,6 +76,10 @@ export default function MapView() {
             isProgrammaticUpdate={isProgrammaticUpdate}
           />
         )}
+        <MultiPolygonView
+          geoData={gndGeo}
+          label={gnd ? gnd.name + " " + gnd.regionName : null}
+        />
       </MapContainer>
       <Crosshairs />
     </Box>

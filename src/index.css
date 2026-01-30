@@ -11,3 +11,15 @@ code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.polygon-label.leaflet-tooltip {
+  background: "white";
+  border: none;
+  box-shadow: none;
+  font-family: inherit;
+  padding: 0;
+}
+
+.polygon-label.leaflet-tooltip::before {
+  display: none;
+}
