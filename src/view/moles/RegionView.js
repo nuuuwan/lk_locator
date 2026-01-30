@@ -55,7 +55,10 @@ export default function RegionView({ region, regionClass }) {
           elevation={1}
         >
           {region ? (
-            <Typography variant="h6" sx={{ fontSize: getFontSize(region.name) }}>
+            <Typography
+              variant="h6"
+              sx={{ fontSize: getFontSize(region.name) }}
+            >
               {region.name}
             </Typography>
           ) : (
