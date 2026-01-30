@@ -1,4 +1,10 @@
-import { Paper, CircularProgress, Typography } from "@mui/material";
+import {
+  Paper,
+  CircularProgress,
+  Typography,
+  ButtonBase,
+  Tooltip,
+} from "@mui/material";
 
 export default function RegionView({ region, regionClass }) {
   if (!region) {
@@ -14,18 +20,52 @@ export default function RegionView({ region, regionClass }) {
     return "0.75rem";
   };
 
+  const handleClick = () => {
+    if (region) {
+      const query = `${region.name} ${regionClass.regionName}`;
+      const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(url, "_blank");
+    }
+  };
+
   return (
-    <Paper sx={{ m: 0.5, p: 0.5, width: 180 }} elevation={1}>
-      {region ? (
-        <Typography variant="h6" sx={{ fontSize: getFontSize(region.name) }}>
-          {region.name}
-        </Typography>
-      ) : (
-        <CircularProgress size={20} />
-      )}
-      <Typography variant="body2" color="text.secondary">
-        {regionClass.regionName}
-      </Typography>
-    </Paper>
+    <Tooltip title="Open Google Search" arrow>
+      <ButtonBase
+        onClick={handleClick}
+        sx={{
+          width: 180,
+          m: 0.5,
+          display: "block",
+          textAlign: "left",
+          borderRadius: 1,
+          transition: "all 0.2s ease-in-out",
+          "&:hover": {
+            transform: "scale(1.02)",
+            "& .MuiPaper-root": {
+              elevation: 4,
+              boxShadow: 4,
+              bgcolor: "action.hover",
+            },
+          },
+        }}
+        disabled={!region}
+      >
+        <Paper
+          sx={{ p: 0.5, width: "100%", transition: "all 0.2s" }}
+          elevation={1}
+        >
+          {region ? (
+            <Typography variant="h6" sx={{ fontSize: getFontSize(region.name) }}>
+              {region.name}
+            </Typography>
+          ) : (
+            <CircularProgress size={20} />
+          )}
+          <Typography variant="body2" color="text.secondary">
+            {regionClass.regionName}
+          </Typography>
+        </Paper>
+      </ButtonBase>
+    </Tooltip>
   );
 }
