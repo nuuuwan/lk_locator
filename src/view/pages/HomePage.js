@@ -51,7 +51,7 @@ function HomePageContent() {
           position: "fixed",
           top: 0,
           right: 0,
-          width: 240,
+          width: 150,
           zIndex: 2000,
         }}
       >
