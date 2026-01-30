@@ -16,3 +16,5 @@ Just drag anywhere on the map to instantly see the corresponding:
 Why not use Google Maps? Because it does not tell you which DSD, GND, PD, or local authority your location belongs to.
 
 CODE: <https://github.com/nuuuwan/lk_locator>
+
+ #SriLanka #GeoLocation
