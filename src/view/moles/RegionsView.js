@@ -20,9 +20,11 @@ export default function RegionsView() {
     gnd,
     gndGeo,
     ed,
+    edGeo,
     pd,
     pdGeo,
     lg,
+    lgGeo,
   } = useData();
   if (!province) {
     return <Alert severity="warning">Regions Unknown.</Alert>;
@@ -46,11 +48,11 @@ export default function RegionsView() {
         <RegionView region={gnd} regionClass={GND} regionGeo={gndGeo} />
       </Stack>
       <Stack direction="row">
-        <RegionView region={ed} regionClass={ED} />
+        <RegionView region={ed} regionClass={ED} regionGeo={edGeo} />
         <RegionView region={pd} regionClass={PD} regionGeo={pdGeo} />
       </Stack>
       <Stack direction="row">
-        <RegionView region={lg} regionClass={LG} />
+        <RegionView region={lg} regionClass={LG} regionGeo={lgGeo} />
       </Stack>
     </Box>
   );

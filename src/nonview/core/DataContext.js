@@ -40,7 +40,9 @@ export function DataProvider({ children }) {
   const [pd, setPd] = useState(null);
   const [pdGeo, setPdGeo] = useState(null);
   const [lg, setLg] = useState(null);
+  const [lgGeo, setLgGeo] = useState(null);
   const [ed, setEd] = useState(null);
+  const [edGeo, setEdGeo] = useState(null);
   const [nominatimData, setNominatimData] = useState(null);
   const [zoom, setZoom] = useState(12);
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -72,7 +74,9 @@ export function DataProvider({ children }) {
     setPd(null);
     setPdGeo(null);
     setLg(null);
+    setLgGeo(null);
     setEd(null);
+    setEdGeo(null);
     setNominatimData(null);
 
     const findRegions = async () => {
@@ -123,6 +127,8 @@ export function DataProvider({ children }) {
       const foundEd = await ED.fromID(edID);
       if (foundEd) {
         setEd(foundEd);
+        const edGeo = await foundEd.getGeo();
+        setEdGeo(edGeo);
       }
 
       // PD
@@ -139,6 +145,8 @@ export function DataProvider({ children }) {
       const foundLg = await LG.fromID(lgID);
       if (foundLg) {
         setLg(foundLg);
+        const lgGeo = await foundLg.getGeo();
+        setLgGeo(lgGeo);
       }
     };
 
@@ -177,7 +185,9 @@ export function DataProvider({ children }) {
     pd,
     pdGeo,
     lg,
+    lgGeo,
     ed,
+    edGeo,
     nominatimData,
     zoom,
     selectedRegion,
