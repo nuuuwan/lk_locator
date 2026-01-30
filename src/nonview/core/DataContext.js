@@ -5,6 +5,8 @@ import District from "./District";
 import DSD from "./DSD";
 import GND from "./GND";
 import PD from "./PD";
+import LG from "./LG";
+import ED from "./ED";
 import LatLng from "../base/LatLng";
 
 const DataContext = createContext();
@@ -35,6 +37,8 @@ export function DataProvider({ children }) {
   const [gndGeo, setGndGeo] = useState(null);
   const [gndLegacyData, setGndLegacyData] = useState(null);
   const [pd, setPd] = useState(null);
+  const [lg, setLg] = useState(null);
+  const [ed, setEd] = useState(null);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -61,6 +65,8 @@ export function DataProvider({ children }) {
     setGndGeo(null);
     setGndLegacyData(null);
     setPd(null);
+    setLg(null);
+    setEd(null);
 
     const findRegions = async () => {
       // Province
@@ -107,10 +113,23 @@ export function DataProvider({ children }) {
 
       // PD
       const pdID = gndLegacyData.pd_id;
-      console.debug({ pdID });
       const foundPd = await PD.fromID(pdID);
       if (foundPd) {
         setPd(foundPd);
+      }
+
+      // LG
+      const lgID = gndLegacyData.lg_id;
+      const foundLg = await LG.fromID(lgID);
+      if (foundLg) {
+        setLg(foundLg);
+      }
+
+      // ED
+      const edID = gndLegacyData.ed_id;
+      const foundEd = await ED.fromID(edID);
+      if (foundEd) {
+        setEd(foundEd);
       }
     };
 
@@ -134,6 +153,8 @@ export function DataProvider({ children }) {
     gndGeo,
     gndLegacyData,
     pd,
+    lg,
+    ed,
     onLatLngChange,
   };
 
