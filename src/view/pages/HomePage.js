@@ -28,19 +28,14 @@ function HomePageContent() {
         onClose={handleCloseInstructions}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseInstructions} severity="info" sx={{ m: 1 }}>
-          <p>
-            Just drag anywhere on the map to instantly see the corresponding:
-          </p>
-          <ul>
-            <li>Province</li>
-            <li>District</li>
-            <li>Divisional Secretariat Division</li>
-            <li>Grama Niladhari Division</li>
-            <li>Electoral District</li>
-            <li>Polling Division</li>
-            <li>Local Authority</li>
-          </ul>
+        <Alert
+          onClose={handleCloseInstructions}
+          severity="info"
+          sx={{ mb: 10 }}
+        >
+          Just drag anywhere on the map to instantly see the corresponding: •
+          Province, District, Divisional Secretariat Division, Grama Niladhari
+          Division, Electoral District, Polling Division, or Local Authority
         </Alert>
       </Snackbar>
 
