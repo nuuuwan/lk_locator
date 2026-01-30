@@ -31,51 +31,53 @@ export default function RegionView({ region, regionClass, regionGeo }) {
 
   return (
     <Tooltip title="Open Google Search" arrow>
-      <ButtonBase
-        onClick={handleClick}
-        sx={{
-          width: 180,
-          m: 0.5,
-          display: "block",
-          textAlign: "left",
-          borderRadius: 1,
-          transition: "all 0.2s ease-in-out",
-          "&:hover": {
-            transform: "scale(1.02)",
-            "& .MuiPaper-root": {
-              elevation: 4,
-              boxShadow: 4,
-              bgcolor: "action.hover",
-            },
-          },
-        }}
-        disabled={!region}
-      >
-        <Paper
+      <span>
+        <ButtonBase
+          onClick={handleClick}
           sx={{
-            p: 0.5,
-            width: "100%",
-            transition: "all 0.2s",
-            bgcolor: isSelected ? "primary.main" : "background.paper",
-            color: isSelected ? "primary.contrastText" : "text.primary",
+            width: 180,
+            m: 0.5,
+            display: "block",
+            textAlign: "left",
+            borderRadius: 1,
+            transition: "all 0.2s ease-in-out",
+            "&:hover": {
+              transform: "scale(1.02)",
+              "& .MuiPaper-root": {
+                elevation: 4,
+                boxShadow: 4,
+                bgcolor: "action.hover",
+              },
+            },
           }}
-          elevation={isSelected ? 3 : 1}
+          disabled={!region}
         >
-          {region ? (
-            <Typography
-              variant="h6"
-              sx={{ fontSize: getFontSize(region.name) }}
-            >
-              {region.name}
+          <Paper
+            sx={{
+              p: 0.5,
+              width: "100%",
+              transition: "all 0.2s",
+              bgcolor: isSelected ? "primary.main" : "background.paper",
+              color: isSelected ? "primary.contrastText" : "text.primary",
+            }}
+            elevation={isSelected ? 3 : 1}
+          >
+            {region ? (
+              <Typography
+                variant="h6"
+                sx={{ fontSize: getFontSize(region.name) }}
+              >
+                {region.name}
+              </Typography>
+            ) : (
+              <CircularProgress size={20} />
+            )}
+            <Typography variant="body2" color="text.secondary">
+              {regionClass.regionName}
             </Typography>
-          ) : (
-            <CircularProgress size={20} />
-          )}
-          <Typography variant="body2" color="text.secondary">
-            {regionClass.regionName}
-          </Typography>
-        </Paper>
-      </ButtonBase>
+          </Paper>
+        </ButtonBase>
+      </span>
     </Tooltip>
   );
 }
