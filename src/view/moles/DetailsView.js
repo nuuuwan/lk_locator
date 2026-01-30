@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 
 import RegionsView from "./RegionsView";
-import NominatimView from "../atoms/NominatimView";
 
 export default function DetailsView() {
   return (
@@ -17,7 +16,6 @@ export default function DetailsView() {
       }}
     >
       <RegionsView />
-      <NominatimView />
     </Box>
   );
 }
