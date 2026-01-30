@@ -29,11 +29,17 @@ export default function CustomAppBar({ latLng }) {
 
   return (
     <AppBar
-      position="static"
       sx={{
         backgroundColor: "primary.main",
         color: "white",
         boxShadow: 2,
+
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 48,
+        zIndex: 3000,
       }}
     >
       <Toolbar sx={{ minHeight: 48 }}>

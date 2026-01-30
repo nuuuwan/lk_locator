@@ -22,6 +22,7 @@ function HomePageContent() {
   return (
     <Box sx={{}}>
       <CustomAppBar latLng={latLng} />
+
       <Snackbar
         open={showInstructions}
         autoHideDuration={8_000}
@@ -42,8 +43,8 @@ function HomePageContent() {
       <Box
         sx={{
           position: "fixed",
-          top: 48,
-          bottom: 80,
+          top: 0,
+          bottom: 0,
           left: 0,
           right: 0,
           zIndex: 1000,
