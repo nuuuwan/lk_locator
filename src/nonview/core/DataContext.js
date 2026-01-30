@@ -37,6 +37,7 @@ export function DataProvider({ children }) {
   const [gndGeo, setGndGeo] = useState(null);
   const [gndLegacyData, setGndLegacyData] = useState(null);
   const [pd, setPd] = useState(null);
+  const [pdGeo, setPdGeo] = useState(null);
   const [lg, setLg] = useState(null);
   const [ed, setEd] = useState(null);
 
@@ -65,6 +66,7 @@ export function DataProvider({ children }) {
     setGndGeo(null);
     setGndLegacyData(null);
     setPd(null);
+    setPdGeo(null);
     setLg(null);
     setEd(null);
 
@@ -116,6 +118,8 @@ export function DataProvider({ children }) {
       const foundPd = await PD.fromID(pdID);
       if (foundPd) {
         setPd(foundPd);
+        const pdGeo = await foundPd.getGeo();
+        setPdGeo(pdGeo);
       }
 
       // LG
@@ -153,6 +157,7 @@ export function DataProvider({ children }) {
     gndGeo,
     gndLegacyData,
     pd,
+    pdGeo,
     lg,
     ed,
     onLatLngChange,
