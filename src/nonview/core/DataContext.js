@@ -42,6 +42,7 @@ export function DataProvider({ children }) {
   const [lg, setLg] = useState(null);
   const [ed, setEd] = useState(null);
   const [nominatimData, setNominatimData] = useState(null);
+  const [zoom, setZoom] = useState(12);
 
   useEffect(() => {
     // If no valid latlng from URL, get browser location
@@ -149,8 +150,11 @@ export function DataProvider({ children }) {
     fetchNominatim();
   }, [latLng]);
 
-  const onLatLngChange = (newLatLng) => {
+  const onLatLngChange = (newLatLng, newZoom) => {
     setLatLng(newLatLng);
+    if (newZoom !== undefined) {
+      setZoom(newZoom);
+    }
     navigate(`/${newLatLng.toString()}`, { replace: true });
   };
 
@@ -170,6 +174,7 @@ export function DataProvider({ children }) {
     lg,
     ed,
     nominatimData,
+    zoom,
     onLatLngChange,
   };
 

@@ -7,19 +7,19 @@ import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
 import MultiPolygonView from "../atoms/MultiPolygonView";
 
-function MapCenterController({ latLng, isProgrammaticUpdate }) {
+function MapCenterController({ latLng, zoom, isProgrammaticUpdate }) {
   const map = useMap();
 
   useEffect(() => {
     if (latLng) {
       isProgrammaticUpdate.current = true;
-      map.setView(latLng.toArray(), map.getZoom());
+      map.setView(latLng.toArray(), zoom);
       // Reset flag after a short delay
       setTimeout(() => {
         isProgrammaticUpdate.current = false;
       }, 100);
     }
-  }, [latLng, map, isProgrammaticUpdate]);
+  }, [latLng, zoom, map, isProgrammaticUpdate]);
 
   return null;
 }
@@ -50,7 +50,7 @@ function MapEventHandler({ onLatLngChange, isProgrammaticUpdate }) {
 }
 
 export default function MapView() {
-  const { latLng, onLatLngChange, gnd, gndGeo } = useData();
+  const { latLng, onLatLngChange, gnd, gndGeo, zoom } = useData();
   const position = latLng.toArray();
   const isProgrammaticUpdate = useRef(false);
 
@@ -58,7 +58,7 @@ export default function MapView() {
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
       <MapContainer
         center={position}
-        zoom={12}
+        zoom={zoom}
         zoomControl={false}
         style={{ width: "100%", height: "100%" }}
       >
@@ -68,6 +68,7 @@ export default function MapView() {
         />
         <MapCenterController
           latLng={latLng}
+          zoom={zoom}
           isProgrammaticUpdate={isProgrammaticUpdate}
         />
         {onLatLngChange && (
