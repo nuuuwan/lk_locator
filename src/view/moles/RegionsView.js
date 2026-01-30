@@ -7,7 +7,13 @@ export default function RegionsView() {
     return <Alert severity="warning">Regions Unknown.</Alert>;
   }
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gap: 0,
+      }}
+    >
       <RegionView region={province} />
       <RegionView region={district} />
       <RegionView region={dsd} />

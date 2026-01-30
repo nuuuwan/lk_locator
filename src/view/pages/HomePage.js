@@ -58,8 +58,9 @@ function HomePageContent() {
         sx={{
           position: "fixed",
           top: 0,
+          left: 0,
           right: 0,
-          width: 210,
+          height: "content-height",
           zIndex: 2000,
         }}
       >

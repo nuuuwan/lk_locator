@@ -18,9 +18,6 @@ export default function DetailsView() {
         opacity: 0.95,
       }}
     >
-      <Paper sx={{ m: 0.5, p: 0.5 }} elevation={1}>
-        <Typography variant="body1">{latLng.toString()}</Typography>
-      </Paper>
       <RegionsView />
     </Box>
   );
