@@ -11,7 +11,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
   const { selectedRegion, onRegionSelect } = useData();
 
   const isSelected =
-    selectedRegion && region && seselectedRegion.region.id === region.id;
+    selectedRegion && region && selectedRegion.region.id === region.id;
 
   const getFontSize = (text) => {
     if (!text) return "1.25rem";
