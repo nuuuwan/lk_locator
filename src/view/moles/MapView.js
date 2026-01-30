@@ -33,8 +33,15 @@ function MapEventHandler({ onLatLngChange }) {
 }
 
 export default function MapView() {
-  const { latLng, onLatLngChange, provinceGeo, districtGeo, dsdGeo, gndGeo } =
-    useData();
+  const {
+    latLng,
+    onLatLngChange,
+    provinceGeo,
+    districtGeo,
+    dsdGeo,
+    gndGeo,
+    pdGeo,
+  } = useData();
   const position = latLng.toArray();
 
   const handleLocateClick = async () => {
@@ -58,10 +65,6 @@ export default function MapView() {
         />
         <MapCenterController latLng={latLng} />
         {onLatLngChange && <MapEventHandler onLatLngChange={onLatLngChange} />}
-        <MultiPolygonView multiPolygon={provinceGeo} />
-        <MultiPolygonView multiPolygon={districtGeo} />
-        <MultiPolygonView multiPolygon={dsdGeo} />
-        <MultiPolygonView multiPolygon={gndGeo} />
       </MapContainer>
       <Crosshairs />
       <Box
