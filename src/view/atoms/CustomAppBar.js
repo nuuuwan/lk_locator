@@ -8,11 +8,13 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
+  Divider,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MenuIcon from "@mui/icons-material/Menu";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import VERSION from "../../nonview/cons/VERSION";
 
 export default function CustomAppBar({ latLng }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -75,6 +77,13 @@ export default function CustomAppBar({ latLng }) {
               <RefreshIcon />
             </ListItemIcon>
             <ListItemText>Refresh App</ListItemText>
+          </MenuItem>
+          <Divider />
+          <MenuItem disabled>
+            <ListItemText
+              secondary={`Version: ${VERSION.DATETIME_STR}`}
+              sx={{ textAlign: "center" }}
+            />
           </MenuItem>
         </Menu>
       </Toolbar>
