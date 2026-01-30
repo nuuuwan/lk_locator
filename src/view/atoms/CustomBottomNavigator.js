@@ -2,12 +2,13 @@ import { useState } from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CasinoIcon from "@mui/icons-material/Casino";
+import GoogleIcon from "@mui/icons-material/Google";
 import { useData } from "../../nonview/core/DataContext";
 import LatLng from "../../nonview/base/LatLng";
 import GND from "../../nonview/core/GND";
 
 export default function CustomBottomNavigator() {
-  const { onLatLngChange } = useData();
+  const { latLng, onLatLngChange } = useData();
   const [value, setValue] = useState(null);
 
   const handleLocateClick = async () => {
@@ -37,12 +38,21 @@ export default function CustomBottomNavigator() {
     }
   };
 
+  const handleGoogleMapsClick = () => {
+    if (latLng) {
+      const url = `https://www.google.com/maps?q=${latLng.lat},${latLng.lng}`;
+      window.open(url, "_blank");
+    }
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
       handleLocateClick();
     } else if (newValue === 1) {
       handleRandomClick();
+    } else if (newValue === 2) {
+      handleGoogleMapsClick();
     }
   };
 
@@ -66,6 +76,7 @@ export default function CustomBottomNavigator() {
     >
       <BottomNavigationAction icon={<MyLocationIcon sx={{ fontSize: 20 }} />} />
       <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
+      <BottomNavigationAction icon={<GoogleIcon sx={{ fontSize: 20 }} />} />
     </BottomNavigation>
   );
 }
