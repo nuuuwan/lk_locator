@@ -1,4 +1,4 @@
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Stack } from "@mui/material";
 import RegionView from "./RegionView";
 import { useData } from "../../nonview/core/DataContext";
 import Province from "../../nonview/core/Province";
@@ -15,20 +15,22 @@ export default function RegionsView() {
     return <Alert severity="warning">Regions Unknown.</Alert>;
   }
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-        gap: 0,
-      }}
-    >
-      <RegionView region={province} regionClass={Province} />
-      <RegionView region={district} regionClass={District} />
-      <RegionView region={dsd} regionClass={DSD} />
-      <RegionView region={gnd} regionClass={GND} />
-      <RegionView region={ed} regionClass={ED} />
-      <RegionView region={pd} regionClass={PD} />
-      <RegionView region={lg} regionClass={LG} />
+    <Box>
+      <Stack direction="row">
+        <RegionView region={province} regionClass={Province} />
+        <RegionView region={district} regionClass={District} />
+      </Stack>
+      <Stack direction="row">
+        <RegionView region={dsd} regionClass={DSD} />
+        <RegionView region={gnd} regionClass={GND} />
+      </Stack>
+      <Stack direction="row">
+        <RegionView region={ed} regionClass={ED} />
+        <RegionView region={pd} regionClass={PD} />
+      </Stack>
+      <Stack direction="row">
+        <RegionView region={lg} regionClass={LG} />
+      </Stack>
     </Box>
   );
 }
