@@ -1,10 +1,9 @@
 import React from "react";
-import { Polygon, Tooltip } from "react-leaflet";
+import { Polygon } from "react-leaflet";
 
 export default function MultiPolygonView({
   multiPolygon,
   geoData,
-  label,
   color = "blue",
   fillOpacity = 0.5,
 }) {
@@ -31,18 +30,7 @@ export default function MultiPolygonView({
               fillOpacity: fillOpacity,
               weight: 2,
             }}
-          >
-            {label && (
-              <Tooltip
-                permanent
-                direction="center"
-                opacity={0.9}
-                className="polygon-label"
-              >
-                <div style={{ border: "none", boxShadow: "none" }}>{label}</div>
-              </Tooltip>
-            )}
-          </Polygon>
+          />
         );
       })}
     </>
