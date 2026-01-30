@@ -1,4 +1,12 @@
 export default class LatLng {
+  // Sri Lanka bounding box coordinates
+  static BOUNDS = {
+    MIN_LAT: 5.9, // Southern tip
+    MAX_LAT: 9.9, // Northern tip
+    MIN_LNG: 79.5, // Western edge
+    MAX_LNG: 81.95, // Eastern edge
+  };
+
   constructor(lat, lng) {
     this.lat = lat;
     this.lng = lng;
@@ -51,6 +59,29 @@ export default class LatLng {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return R * c;
+  }
+
+  // Check if coordinates are within Sri Lanka bounds
+  isWithinSriLankaBounds() {
+    return (
+      this.lat >= LatLng.BOUNDS.MIN_LAT &&
+      this.lat <= LatLng.BOUNDS.MAX_LAT &&
+      this.lng >= LatLng.BOUNDS.MIN_LNG &&
+      this.lng <= LatLng.BOUNDS.MAX_LNG
+    );
+  }
+
+  // Constrain coordinates to Sri Lanka bounds
+  constrainToSriLankaBounds() {
+    const lat = Math.max(
+      LatLng.BOUNDS.MIN_LAT,
+      Math.min(LatLng.BOUNDS.MAX_LAT, this.lat),
+    );
+    const lng = Math.max(
+      LatLng.BOUNDS.MIN_LNG,
+      Math.min(LatLng.BOUNDS.MAX_LNG, this.lng),
+    );
+    return new LatLng(lat, lng);
   }
 
   // Default center of Sri Lanka
