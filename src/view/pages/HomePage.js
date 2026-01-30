@@ -36,7 +36,7 @@ function HomePageContent() {
         >
           Just drag anywhere on the map to instantly see the corresponding:
           Province, District, Divisional Secretariat Division, Grama Niladhari
-          Division, Electoral District, Polling Division, or Local Authority
+          Division, Electoral District, Polling Division, or Local Authority.
         </Alert>
       </Snackbar>
 
