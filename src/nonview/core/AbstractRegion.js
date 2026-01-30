@@ -55,13 +55,17 @@ export default class AbstractRegion {
     });
   }
 
-  static async listAll() {
+  static get url() {
     const regionShortName = this.regionShortName.toLowerCase();
-
-    const url =
+    return (
       `https://raw.githubusercontent.com` +
       `/nuuuwan/lk_admin_regions/refs/heads/main` +
-      `/data/ents/${regionShortName}s.tsv`;
+      `/data/ents/${regionShortName}s.tsv`
+    );
+  }
+
+  static async listAll() {
+    const url = this.url;
     try {
       const data = await WWW.fetchTSV(url);
       const regions = data.map((item) => this.fromAPIObject(item));
@@ -72,15 +76,14 @@ export default class AbstractRegion {
     }
   }
 
-  toObject() {
-    return {
-      id: this.id,
-      name: this.name,
-      nameSi: this.nameSi,
-      nameTa: this.nameTa,
-      areaSqKm: this.areaSqKm,
-      centerLatLng: this.centerLatLng?.toObject(),
-    };
+  static async idx() {
+    const regions = await this.listAll();
+    return Object.fromEntries(regions.map((region) => [region.id, region]));
+  }
+
+  static async fromID(id) {
+    const regionsIdx = await this.idx();
+    return regionsIdx[id] || null;
   }
 
   async getGeo() {
