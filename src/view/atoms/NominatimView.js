@@ -17,6 +17,9 @@ export default function NominatimView() {
           {display_name}
         </Typography>
       )}
+      <Typography variant="body2" color="text.secondary" sx={{ opacity: 0.5 }}>
+        via OpenStreetMap Nominatim
+      </Typography>
     </Paper>
   );
 }
