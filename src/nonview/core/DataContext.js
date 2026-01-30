@@ -8,7 +8,6 @@ import PD from "./PD";
 import LG from "./LG";
 import ED from "./ED";
 import LatLng from "../base/LatLng";
-import Nominatim from "../base/Nominatim";
 
 const DataContext = createContext();
 
@@ -43,7 +42,6 @@ export function DataProvider({ children }) {
   const [lgGeo, setLgGeo] = useState(null);
   const [ed, setEd] = useState(null);
   const [edGeo, setEdGeo] = useState(null);
-  const [nominatimData, setNominatimData] = useState(null);
   const [zoom, setZoom] = useState(12);
   const [selectedRegion, setSelectedRegion] = useState(null);
 
@@ -77,7 +75,6 @@ export function DataProvider({ children }) {
     setLgGeo(null);
     setEd(null);
     setEdGeo(null);
-    setNominatimData(null);
 
     const findRegions = async () => {
       // Province
@@ -153,13 +150,7 @@ export function DataProvider({ children }) {
       }
     };
 
-    const fetchNominatim = async () => {
-      const data = await Nominatim.reverseGeocode(latLng);
-      setNominatimData(data);
-    };
-
     findRegions();
-    fetchNominatim();
   }, [latLng]);
 
   const onLatLngChange = (newLatLng, newZoom) => {
@@ -191,7 +182,6 @@ export function DataProvider({ children }) {
     lgGeo,
     ed,
     edGeo,
-    nominatimData,
     zoom,
     selectedRegion,
     onLatLngChange,
