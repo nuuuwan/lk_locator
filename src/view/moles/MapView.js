@@ -3,9 +3,11 @@ import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Box, IconButton } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
+import CasinoIcon from "@mui/icons-material/Casino";
 import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
+import GND from "../../nonview/core/GND";
 
 function MapCenterController({ latLng, isProgrammaticUpdate }) {
   const map = useMap();
@@ -68,6 +70,19 @@ export default function MapView() {
     }
   };
 
+  const handleRandomClick = async () => {
+    if (onLatLngChange) {
+      const allGNDs = await GND.listAll();
+      if (allGNDs.length > 0) {
+        const randomIndex = Math.floor(Math.random() * allGNDs.length);
+        const randomGND = allGNDs[randomIndex];
+        if (randomGND.centerLatLng) {
+          onLatLngChange(randomGND.centerLatLng);
+        }
+      }
+    }
+  };
+
   return (
     <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
       <MapContainer
@@ -98,6 +113,9 @@ export default function MapView() {
           bottom: 16,
           right: 16,
           zIndex: 2000,
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
         }}
       >
         <IconButton
@@ -112,6 +130,19 @@ export default function MapView() {
           }}
         >
           <MyLocationIcon />
+        </IconButton>
+        <IconButton
+          color="primary"
+          onClick={handleRandomClick}
+          sx={{
+            backgroundColor: "white",
+            boxShadow: 2,
+            "&:hover": {
+              backgroundColor: "grey.100",
+            },
+          }}
+        >
+          <CasinoIcon />
         </IconButton>
       </Box>
     </Box>
