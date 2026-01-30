@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Space Mono", monospace',
+    fontFamily: '"Figtree", sans-serif',
     fontSize: 10,
   },
 });
