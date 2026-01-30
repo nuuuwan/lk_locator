@@ -15,7 +15,7 @@ export default function DetailsView() {
         flexDirection: "column",
         position: "relative",
         p: 1,
-        opacity: 0.8,
+        opacity: 0.95,
       }}
     >
       <Paper sx={{ m: 0.5, p: 0.5 }} elevation={1}>
