@@ -79,9 +79,17 @@ export default function CustomBottomNavigator() {
         },
       }}
     >
-      <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
-      <BottomNavigationAction icon={<MapIcon sx={{ fontSize: 20 }} />} />
-      <BottomNavigationAction icon={<MyLocationIcon sx={{ fontSize: 20 }} />} />
+      <Tooltip title="Go to random location" placement="top">
+        <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
+      </Tooltip>
+      <Tooltip title="Open in Google Maps" placement="top">
+        <BottomNavigationAction icon={<MapIcon sx={{ fontSize: 20 }} />} />
+      </Tooltip>
+      <Tooltip title="Go to my location" placement="top">
+        <BottomNavigationAction
+          icon={<MyLocationIcon sx={{ fontSize: 20 }} />}
+        />
+      </Tooltip>
     </BottomNavigation>
   );
 }
