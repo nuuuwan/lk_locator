@@ -14,7 +14,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Ubuntu", sans-serif',
-    fontSize: 12,
+    fontSize: 10,
   },
 });
 
