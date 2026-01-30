@@ -1,10 +1,10 @@
 import { Box, Paper, Typography } from "@mui/material";
 
 import { useData } from "../../nonview/core/DataContext";
-import RegionView from "./RegionView";
+import RegionsView from "./RegionsView";
 
 export default function DetailsView() {
-  const { latLng, province, district, dsd, gnd, ed, pd, lg } = useData();
+  const { latLng } = useData();
 
   return (
     <Box
@@ -21,13 +21,7 @@ export default function DetailsView() {
       <Paper sx={{ m: 0.5, p: 0.5 }} elevation={1}>
         <Typography variant="body1">{latLng.toString()}</Typography>
       </Paper>
-      <RegionView region={province} />
-      <RegionView region={district} />
-      <RegionView region={dsd} />
-      <RegionView region={gnd} />
-      <RegionView region={ed} />
-      <RegionView region={pd} />
-      <RegionView region={lg} />
+      <RegionsView />
     </Box>
   );
 }
