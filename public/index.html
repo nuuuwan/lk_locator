@@ -37,7 +37,9 @@
           var match = query.match(/redirect=([^&]+)/);
           if (match) {
             var redirect = decodeURIComponent(match[1]);
-            window.history.replaceState(null, null, redirect);
+            // Ensure the path includes the basename
+            var fullPath = '/lk_locator' + redirect;
+            window.history.replaceState(null, null, fullPath);
           }
         }
       })();
