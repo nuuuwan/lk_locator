@@ -35,7 +35,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
         <ButtonBase
           onClick={handleClick}
           sx={{
-            width: 180,
+            width: "calc(min(45vw, 180px))",
             m: 0.5,
             display: "block",
             textAlign: "left",

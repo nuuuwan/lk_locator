@@ -59,7 +59,7 @@ function HomePageContent() {
           top: 48,
           left: 0,
           height: "content-height",
-          width: "calc(min(100%, 400px))",
+          width: "calc(min(90%, 400px))",
           zIndex: 2000,
         }}
       >
