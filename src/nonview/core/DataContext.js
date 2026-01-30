@@ -116,6 +116,9 @@ export function DataProvider({ children }) {
       const gndGeo = await foundGnd.getGeo();
       setGndGeo(gndGeo);
 
+      // Set GND as default selected region
+      setSelectedRegion({ region: foundGnd, regionGeo: gndGeo });
+
       const gndLegacyData = await foundGnd.getLegacyData();
       if (!gndLegacyData) {
         return;
