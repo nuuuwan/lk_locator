@@ -32,7 +32,6 @@ export default function RegionView({ region, regionClass, regionGeo }) {
         textAlign: "left",
         borderRadius: 0.5,
         bgcolor: isSelected ? "primary.main" : "grey.50",
-        color: isSelected ? "primary.contrastText" : "text.primary",
         p: 0.5,
         transition: "all 0.2s ease-in-out",
         "&:hover": {
@@ -47,7 +46,11 @@ export default function RegionView({ region, regionClass, regionGeo }) {
           {region ? (
             <Typography
               variant="body2"
-              sx={{ fontSize: getFontSize(region.name), fontWeight: 500 }}
+              sx={{
+                fontSize: getFontSize(region.name),
+                fontWeight: 500,
+                color: isSelected ? "primary.contrastText" : "primary.main",
+              }}
             >
               {region.name}
             </Typography>
@@ -55,12 +58,18 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             <CircularProgress size={12} />
           )}
         </Box>
-        <Typography
-          variant="caption"
-          sx={{ opacity: 0.6, fontSize: "0.65rem" }}
-        >
-          {regionClass.regionName}
-        </Typography>
+        {region && (
+          <Typography
+            variant="caption"
+            sx={{
+              opacity: 0.6,
+              fontSize: "0.65rem",
+              color: isSelected ? "white" : "grey",
+            }}
+          >
+            {regionClass.regionName}
+          </Typography>
+        )}
       </Box>
     </ButtonBase>
   );

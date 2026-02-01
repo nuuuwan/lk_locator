@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Ubuntu Mono", sans-serif',
+    fontFamily: '"Noto Sans", sans-serif',
     fontSize: 15,
   },
 });
