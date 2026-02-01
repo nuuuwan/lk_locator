@@ -9,7 +9,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
 
   const getFontSize = (text) => {
     if (!text) return "0.9rem";
-    const p = Math.min(0.9, 15 / text.length);
+    const p = Math.min(0.9, 20 / text.length);
     return `${p}rem`;
   };
 
