@@ -37,7 +37,6 @@ export default function RegionView({ region, regionClass, regionGeo }) {
         borderRadius: 1,
         bgcolor: isSelected ? "primary.main" : "grey.50",
         p: 0.5,
-        m: 0.5,
         transition: "all 0.2s ease-in-out",
         "&:hover": {
           bgcolor: isSelected ? "primary.main" : "primary.main",
