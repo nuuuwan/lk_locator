@@ -1,4 +1,4 @@
-import { Paper, CircularProgress, Typography, ButtonBase } from "@mui/material";
+import { Box, CircularProgress, Typography, ButtonBase } from "@mui/material";
 import { useData } from "../../nonview/core/DataContext";
 
 export default function RegionView({ region, regionClass, regionGeo }) {
@@ -8,13 +8,13 @@ export default function RegionView({ region, regionClass, regionGeo }) {
     selectedRegion && region && selectedRegion.region.id === region.id;
 
   const getFontSize = (text) => {
-    if (!text) return "1.25rem";
+    if (!text) return "0.9rem";
     const length = text.length;
-    if (length <= 10) return "1.25rem";
-    if (length <= 15) return "1.1rem";
-    if (length <= 20) return "0.95rem";
-    if (length <= 25) return "0.85rem";
-    return "0.75rem";
+    if (length <= 10) return "0.9rem";
+    if (length <= 15) return "0.85rem";
+    if (length <= 20) return "0.8rem";
+    if (length <= 25) return "0.75rem";
+    return "0.7rem";
   };
 
   const handleClick = () => {
@@ -27,44 +27,41 @@ export default function RegionView({ region, regionClass, regionGeo }) {
     <ButtonBase
       onClick={handleClick}
       sx={{
-        width: "calc(min(45vw, 180px))",
-        m: 0.5,
+        flex: 1,
         display: "block",
         textAlign: "left",
-        borderRadius: 1,
+        borderRadius: 0.5,
+        bgcolor: isSelected ? "primary.main" : "grey.50",
+        color: isSelected ? "primary.contrastText" : "text.primary",
+        p: 0.5,
         transition: "all 0.2s ease-in-out",
         "&:hover": {
-          transform: "scale(1.02)",
-          "& .MuiPaper-root": {
-            elevation: 4,
-            boxShadow: 4,
-            bgcolor: "primary.main",
-          },
+          bgcolor: isSelected ? "primary.main" : "grey.100",
         },
+        height: 48,
       }}
       disabled={!region}
     >
-      <Paper
-        sx={{
-          p: 0.5,
-          width: "100%",
-          transition: "all 0.2s",
-          bgcolor: isSelected ? "primary.main" : "primary.contrastText",
-          color: isSelected ? "primary.contrastText" : "black",
-        }}
-        elevation={isSelected ? 3 : 1}
-      >
-        {region ? (
-          <Typography variant="h6" sx={{ fontSize: getFontSize(region.name) }}>
-            {region.name}
-          </Typography>
-        ) : (
-          <CircularProgress size={20} />
-        )}
-        <Typography variant="body2" sx={{ opacity: 0.7, fontSize: "0.75rem" }}>
+      <Box>
+        <Box sx={{ height: 24 }}>
+          {region ? (
+            <Typography
+              variant="body2"
+              sx={{ fontSize: getFontSize(region.name), fontWeight: 500 }}
+            >
+              {region.name}
+            </Typography>
+          ) : (
+            <CircularProgress size={12} />
+          )}
+        </Box>
+        <Typography
+          variant="caption"
+          sx={{ opacity: 0.6, fontSize: "0.65rem" }}
+        >
           {regionClass.regionName}
         </Typography>
-      </Paper>
+      </Box>
     </ButtonBase>
   );
 }
