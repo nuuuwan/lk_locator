@@ -43,7 +43,20 @@ function HomePageContent() {
       <Box
         sx={{
           position: "fixed",
+          top: "50vh",
           top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2000,
+        }}
+      >
+        <DetailsView />
+      </Box>
+
+      <Box
+        sx={{
+          position: "fixed",
+          top: "50vh",
           bottom: 0,
           left: 0,
           right: 0,
@@ -51,19 +64,6 @@ function HomePageContent() {
         }}
       >
         <MapView />
-      </Box>
-
-      <Box
-        sx={{
-          position: "fixed",
-          top: 48,
-          left: 0,
-          height: "content-height",
-          width: "calc(min(90%, 400px))",
-          zIndex: 2000,
-        }}
-      >
-        <DetailsView />
       </Box>
       <CustomBottomNavigator />
     </Box>
