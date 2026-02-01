@@ -3,7 +3,6 @@ import { Box, Snackbar, Alert } from "@mui/material";
 import MapView from "../moles/MapView";
 import DetailsView from "../moles/DetailsView";
 import CustomAppBar from "../atoms/CustomAppBar";
-import CustomBottomNavigator from "../atoms/CustomBottomNavigator";
 import { DataProvider, useData } from "../../nonview/core/DataContext";
 
 function HomePageContent() {
@@ -43,11 +42,11 @@ function HomePageContent() {
       <Box
         sx={{
           position: "fixed",
-          top: "50vh",
           top: 0,
+          bottom: "50vh",
           left: 0,
           right: 0,
-          zIndex: 2000,
+          zIndex: 1000,
         }}
       >
         <DetailsView />
@@ -65,7 +64,6 @@ function HomePageContent() {
       >
         <MapView />
       </Box>
-      <CustomBottomNavigator />
     </Box>
   );
 }

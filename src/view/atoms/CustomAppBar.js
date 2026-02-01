@@ -52,7 +52,7 @@ export default function CustomAppBar({ latLng }) {
         zIndex: 3000,
       }}
     >
-      <Toolbar sx={{ minHeight: 48 }}>
+      <Toolbar sx={{ height: 48 }}>
         <LocationOnIcon sx={{ mr: 1 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {latLng ? latLng.toString() : "LK Locator"}

@@ -6,6 +6,7 @@ import LatLng from "../../nonview/base/LatLng";
 import Crosshairs from "../atoms/Crosshairs";
 import { useData } from "../../nonview/core/DataContext";
 import MultiPolygonView from "../atoms/MultiPolygonView";
+import BottomMenu from "./BottomMenu";
 
 function MapCenterController({
   latLng,
@@ -92,6 +93,7 @@ export default function MapView() {
         )}
       </MapContainer>
       <Crosshairs />
+      <BottomMenu />
     </Box>
   );
 }

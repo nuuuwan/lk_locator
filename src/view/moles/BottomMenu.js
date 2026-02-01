@@ -1,9 +1,4 @@
-import { useState } from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Tooltip,
-} from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CasinoIcon from "@mui/icons-material/Casino";
 
@@ -11,9 +6,8 @@ import { useData } from "../../nonview/core/DataContext";
 import LatLng from "../../nonview/base/LatLng";
 import GND from "../../nonview/core/GND";
 
-export default function CustomBottomNavigator() {
-  const { latLng, onLatLngChange } = useData();
-  const [value, setValue] = useState(null);
+export default function BottomMenu() {
+  const { onLatLngChange } = useData();
 
   const handleLocateClick = async () => {
     if (onLatLngChange) {
@@ -42,41 +36,31 @@ export default function CustomBottomNavigator() {
     }
   };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    if (newValue === 0) {
-      handleRandomClick();
-    } else if (newValue === 1) {
-      handleLocateClick();
-    }
-  };
-
   return (
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
+    <Box
       sx={{
-        position: "fixed",
+        position: "absolute",
         bottom: 0,
-        left: 0,
+        width: 100,
+        height: 48,
         right: 0,
-        zIndex: 3000,
-        boxShadow: 3,
-        height: 60,
-        "& .MuiBottomNavigationAction-root": {
-          minWidth: 80,
-          padding: 2,
-        },
+        zIndex: 2000,
+        display: "flex",
+        justifyContent: "space-evenly",
+        gap: 2,
+        padding: 2,
       }}
     >
       <Tooltip title="Go to random location" placement="top">
-        <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
+        <IconButton onClick={handleRandomClick} color="primary">
+          <CasinoIcon />
+        </IconButton>
       </Tooltip>
       <Tooltip title="Go to my location" placement="top">
-        <BottomNavigationAction
-          icon={<MyLocationIcon sx={{ fontSize: 20 }} />}
-        />
+        <IconButton onClick={handleLocateClick} color="primary">
+          <MyLocationIcon />
+        </IconButton>
       </Tooltip>
-    </BottomNavigation>
+    </Box>
   );
 }
