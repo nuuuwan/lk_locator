@@ -6,10 +6,10 @@ import HomePage from "./view/pages/HomePage";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
+      main: "#EB7400",
     },
     secondary: {
-      main: "#dc004e",
+      main: "#FFBE29",
     },
   },
   typography: {
