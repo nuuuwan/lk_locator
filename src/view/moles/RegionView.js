@@ -9,7 +9,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
 
   const getFontSize = (text) => {
     if (!text) return "0.9rem";
-    const p = Math.min(0.9, 20 / text.length);
+    const p = Math.min(0.9, 16 / text.length);
     return `${p}rem`;
   };
 
@@ -67,7 +67,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
           <Typography
             variant="caption"
             sx={{
-              fontSize: getFontSize(regionClass.regionName),
+              fontSize: "0.6rem",
               color: isSelected ? "grey" : "black",
             }}
           >
