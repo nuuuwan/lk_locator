@@ -43,8 +43,7 @@ export default function CustomAppBar({ latLng }) {
         backgroundColor: "primary.main",
         color: "white",
         boxShadow: 2,
-
-        position: "fixed",
+        position: "absolute",
         top: 0,
         left: 0,
         right: 0,
@@ -52,7 +51,7 @@ export default function CustomAppBar({ latLng }) {
         zIndex: 3000,
       }}
     >
-      <Toolbar sx={{ height: 48 }}>
+      <Toolbar sx={{ height: 48, minHeight: 48 }}>
         <LocationOnIcon sx={{ mr: 1 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           LK Locator

@@ -19,7 +19,15 @@ function HomePageContent() {
   };
 
   return (
-    <Box sx={{}}>
+    <Box
+      sx={{
+        position: "relative",
+        maxWidth: "800px",
+        margin: "0 auto",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+    >
       <CustomAppBar latLng={latLng} />
 
       <Snackbar
@@ -41,13 +49,12 @@ function HomePageContent() {
 
       <Box
         sx={{
-          position: "fixed",
-          top: 0,
-          bottom: "50vh",
+          position: "absolute",
+          top: 48,
+          height: "50%",
           left: 0,
           right: 0,
           zIndex: 1000,
-          marginTop: "48px",
         }}
       >
         <DetailsView />
@@ -55,8 +62,8 @@ function HomePageContent() {
 
       <Box
         sx={{
-          position: "fixed",
-          top: "50vh",
+          position: "absolute",
+          top: "50%",
           bottom: 0,
           left: 0,
           right: 0,
