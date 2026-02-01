@@ -68,7 +68,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             variant="caption"
             sx={{
               fontSize: "0.6rem",
-              color: isSelected ? "grey" : "black",
+              color: isSelected ? "grey.75" : "black",
             }}
           >
             {regionClass.regionName}
