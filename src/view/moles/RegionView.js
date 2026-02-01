@@ -9,12 +9,8 @@ export default function RegionView({ region, regionClass, regionGeo }) {
 
   const getFontSize = (text) => {
     if (!text) return "0.9rem";
-    const length = text.length;
-    if (length <= 10) return "0.9rem";
-    if (length <= 15) return "0.85rem";
-    if (length <= 20) return "0.8rem";
-    if (length <= 25) return "0.75rem";
-    return "0.7rem";
+    const p = Math.min(0.9, 15 / text.length);
+    return `${p}rem`;
   };
 
   const handleClick = () => {
@@ -30,19 +26,21 @@ export default function RegionView({ region, regionClass, regionGeo }) {
         flex: 1,
         display: "block",
         textAlign: "left",
-        borderRadius: 0.5,
+        borderRadius: 1,
         bgcolor: isSelected ? "primary.main" : "grey.50",
         p: 0.5,
+        m: 0.5,
         transition: "all 0.2s ease-in-out",
         "&:hover": {
-          bgcolor: isSelected ? "primary.main" : "grey.100",
+          bgcolor: isSelected ? "primary.main" : "primary.main",
         },
         height: 48,
+        maxWidth: "48vw",
       }}
       disabled={!region}
     >
       <Box>
-        <Box sx={{ height: 24 }}>
+        <Box sx={{ height: 21 }}>
           {region ? (
             <Typography
               variant="body2"
@@ -62,9 +60,8 @@ export default function RegionView({ region, regionClass, regionGeo }) {
           <Typography
             variant="caption"
             sx={{
-              opacity: 0.6,
-              fontSize: "0.65rem",
-              color: isSelected ? "white" : "grey",
+              fontSize: getFontSize(regionClass.regionName),
+              color: isSelected ? "white" : "black",
             }}
           >
             {regionClass.regionName}

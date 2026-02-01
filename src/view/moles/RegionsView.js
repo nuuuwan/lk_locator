@@ -36,8 +36,7 @@ export default function RegionsView() {
 
   return (
     <Box sx={{ width: "100%", p: 0.5 }}>
-      {/* Administrative Regions */}
-      <Box sx={{ mb: 0.5 }}>
+      <Box sx={{ mb: 1 }}>
         <Stack
           direction="row"
           spacing={0.5}
@@ -49,7 +48,6 @@ export default function RegionsView() {
           />
           <Typography
             variant="caption"
-            fontWeight="bold"
             sx={{ color: "text.secondary", fontSize: "0.7rem" }}
           >
             Administrative Regions
@@ -75,7 +73,7 @@ export default function RegionsView() {
         </Stack>
       </Box>
 
-      <Box sx={{ mb: 0.5 }}>
+      <Box sx={{ mb: 1 }}>
         <Stack
           direction="row"
           spacing={0.5}
@@ -85,7 +83,6 @@ export default function RegionsView() {
           <HowToVoteIcon sx={{ fontSize: "0.9rem", color: "text.secondary" }} />
           <Typography
             variant="caption"
-            fontWeight="bold"
             sx={{ color: "text.secondary", fontSize: "0.7rem" }}
           >
             Electoral Regions
@@ -99,8 +96,7 @@ export default function RegionsView() {
         </Stack>
       </Box>
 
-      {/* Local Government Regions */}
-      <Box sx={{ mb: 0.5 }}>
+      <Box sx={{ mb: 1 }}>
         <Stack
           direction="row"
           spacing={0.5}
@@ -112,7 +108,6 @@ export default function RegionsView() {
           />
           <Typography
             variant="caption"
-            fontWeight="bold"
             sx={{ color: "text.secondary", fontSize: "0.7rem" }}
           >
             Local Government Regions

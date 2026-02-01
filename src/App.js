@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Noto Sans", sans-serif',
+    fontFamily: '"Sansation", sans-serif',
     fontSize: 15,
   },
 });
