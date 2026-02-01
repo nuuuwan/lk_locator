@@ -6,7 +6,6 @@ import {
 } from "@mui/material";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CasinoIcon from "@mui/icons-material/Casino";
-import MapIcon from "@mui/icons-material/Map";
 
 import { useData } from "../../nonview/core/DataContext";
 import LatLng from "../../nonview/base/LatLng";
@@ -43,20 +42,11 @@ export default function CustomBottomNavigator() {
     }
   };
 
-  const handleGoogleMapsClick = () => {
-    if (latLng) {
-      const url = `https://www.google.com/maps?q=${latLng.lat},${latLng.lng}`;
-      window.open(url, "_blank");
-    }
-  };
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
       handleRandomClick();
     } else if (newValue === 1) {
-      handleGoogleMapsClick();
-    } else if (newValue === 2) {
       handleLocateClick();
     }
   };
@@ -81,9 +71,6 @@ export default function CustomBottomNavigator() {
     >
       <Tooltip title="Go to random location" placement="top">
         <BottomNavigationAction icon={<CasinoIcon sx={{ fontSize: 20 }} />} />
-      </Tooltip>
-      <Tooltip title="Open in Google Maps" placement="top">
-        <BottomNavigationAction icon={<MapIcon sx={{ fontSize: 20 }} />} />
       </Tooltip>
       <Tooltip title="Go to my location" placement="top">
         <BottomNavigationAction
