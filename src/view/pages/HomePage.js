@@ -47,6 +47,7 @@ function HomePageContent() {
           left: 0,
           right: 0,
           zIndex: 1000,
+          marginTop: "48px",
         }}
       >
         <DetailsView />
