@@ -55,7 +55,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
               sx={{
                 fontSize: getFontSize(displayName),
                 fontWeight: 500,
-                color: isSelected ? "primary.contrastText" : "primary.main",
+                color: isSelected ? "white" : "primary.main",
               }}
             >
               {displayName}
@@ -69,7 +69,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             variant="caption"
             sx={{
               fontSize: getFontSize(regionClass.regionName),
-              color: isSelected ? "white" : "black",
+              color: isSelected ? "grey" : "black",
             }}
           >
             {regionClass.regionName}
