@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography, ButtonBase } from "@mui/material";
 import { useData } from "../../nonview/core/DataContext";
 
 export default function RegionView({ region, regionClass, regionGeo }) {
-  const { selectedRegion, onRegionSelect } = useData();
+  const { selectedRegion, onRegionSelect, gndLegacyData } = useData();
 
   const isSelected =
     selectedRegion && region && selectedRegion.region.id === region.id;
@@ -18,6 +18,14 @@ export default function RegionView({ region, regionClass, regionGeo }) {
       onRegionSelect(region, regionGeo);
     }
   };
+
+  let displayName = region?.name;
+  if (regionClass.regionShortName === "GND") {
+    const gndNum = gndLegacyData?.gnd_num;
+    if (gndNum && gndNum !== "None") {
+      displayName += ` (${gndNum})`;
+    }
+  }
 
   return (
     <ButtonBase
@@ -45,12 +53,12 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             <Typography
               variant="body2"
               sx={{
-                fontSize: getFontSize(region.name),
+                fontSize: getFontSize(displayName),
                 fontWeight: 500,
                 color: isSelected ? "primary.contrastText" : "primary.main",
               }}
             >
-              {region.name}
+              {displayName}
             </Typography>
           ) : (
             <CircularProgress size={12} />

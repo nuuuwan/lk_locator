@@ -120,6 +120,7 @@ export function DataProvider({ children }) {
       if (!gndLegacyData) {
         return;
       }
+      setGnd(foundGnd);
       setGndLegacyData(gndLegacyData);
 
       // ED
