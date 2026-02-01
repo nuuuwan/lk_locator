@@ -41,7 +41,7 @@ export default function BottomMenu() {
       sx={{
         position: "absolute",
         bottom: 0,
-        width: 100,
+        width: 120,
         height: 48,
         right: 0,
         zIndex: 2000,
