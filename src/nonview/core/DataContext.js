@@ -121,11 +121,9 @@ export function DataProvider({ children }) {
         return;
       }
       setGnd(foundGnd);
-      setGndLegacyData(gndLegacyData);
 
       // ED
-      const edID = gndLegacyData.ed_id;
-      const foundEd = await ED.fromID(edID);
+      const foundEd = await ED.find(latLng);
       if (foundEd) {
         setEd(foundEd);
         const edGeo = await foundEd.getGeo();
@@ -133,8 +131,7 @@ export function DataProvider({ children }) {
       }
 
       // PD
-      const pdID = gndLegacyData.pd_id;
-      const foundPd = await PD.fromID(pdID);
+      const foundPd = await PD.find(latLng, foundEd);
       if (foundPd) {
         setPd(foundPd);
         const pdGeo = await foundPd.getGeo();
@@ -142,8 +139,7 @@ export function DataProvider({ children }) {
       }
 
       // LG
-      const lgID = gndLegacyData.lg_id;
-      const foundLg = await LG.fromID(lgID);
+      const foundLg = await LG.find(latLng);
       if (foundLg) {
         setLg(foundLg);
         const lgGeo = await foundLg.getGeo();
