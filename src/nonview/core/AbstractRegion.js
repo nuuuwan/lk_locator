@@ -4,11 +4,12 @@ import Cache from "../base/Cache";
 import WWW from "../base/WWW";
 
 export default class AbstractRegion {
-  constructor({ id, name, areaSqKm, centerLatLng }) {
+  constructor({ id, name, areaSqKm, centerLatLng, rawData }) {
     this.id = id;
     this.name = name;
     this.areaSqKm = areaSqKm;
     this.centerLatLng = centerLatLng;
+    this.rawData = rawData;
   }
 
   static get regionName() {

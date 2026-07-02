@@ -115,15 +115,10 @@ export function DataProvider({ children }) {
 
       // Set GND as default selected region
       setSelectedRegion({ region: foundGnd, regionGeo: gndGeo });
-
-      const gndLegacyData = await foundGnd.getLegacyData();
-      if (!gndLegacyData) {
-        return;
-      }
       setGnd(foundGnd);
 
       // ED
-      const foundEd = await ED.find(latLng);
+      const foundEd = await ED.fromID(foundGnd.edID);
       if (foundEd) {
         setEd(foundEd);
         const edGeo = await foundEd.getGeo();
@@ -131,7 +126,7 @@ export function DataProvider({ children }) {
       }
 
       // PD
-      const foundPd = await PD.find(latLng, foundEd);
+      const foundPd = await PD.fromID(foundGnd.pdID);
       if (foundPd) {
         setPd(foundPd);
         const pdGeo = await foundPd.getGeo();
@@ -139,7 +134,7 @@ export function DataProvider({ children }) {
       }
 
       // LG
-      const foundLg = await LG.find(latLng);
+      const foundLg = await LG.fromID(foundGnd.lgID);
       if (foundLg) {
         setLg(foundLg);
         const lgGeo = await foundLg.getGeo();
