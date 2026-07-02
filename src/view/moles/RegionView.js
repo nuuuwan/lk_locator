@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography, ButtonBase } from "@mui/material";
 import { useData } from "../../nonview/core/DataContext";
 
 export default function RegionView({ region, regionClass, regionGeo }) {
-  const { selectedRegion, onRegionSelect, gndLegacyData } = useData();
+  const { selectedRegion, onRegionSelect } = useData();
 
   const isSelected =
     selectedRegion && region && selectedRegion.region.id === region.id;
