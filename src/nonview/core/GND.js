@@ -36,4 +36,8 @@ export default class GND extends AbstractRegion {
   get lgID() {
     return this.rawData["lg_id"];
   }
+
+  get num() {
+    return this.rawData["num"];
+  }
 }

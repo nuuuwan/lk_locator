@@ -28,6 +28,10 @@ export default class AbstractRegion {
     return this.constructor.regionShortName;
   }
 
+  get otherNames() {
+    return this.rawData["other_names"];
+  }
+
   static fromRawData(data) {
     return new this({
       id: data["id"],
