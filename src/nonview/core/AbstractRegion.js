@@ -4,11 +4,9 @@ import Cache from "../base/Cache";
 import WWW from "../base/WWW";
 
 export default class AbstractRegion {
-  constructor({ id, name, nameSi, nameTa, areaSqKm, centerLatLng }) {
+  constructor({ id, name, areaSqKm, centerLatLng }) {
     this.id = id;
     this.name = name;
-    this.nameSi = nameSi;
-    this.nameTa = nameTa;
     this.areaSqKm = areaSqKm;
     this.centerLatLng = centerLatLng;
   }
@@ -30,28 +28,14 @@ export default class AbstractRegion {
   }
 
   static fromObject(data) {
-    const centerLatLng = data.centerLatLng
-      ? LatLng.fromObject(data.centerLatLng)
-      : null;
-
     return new this({
-      ...data,
-      centerLatLng,
-    });
-  }
-
-  static fromAPIObject(apiData) {
-    // Convert API format to internal format
-    return this.fromObject({
-      id: apiData.id,
-      name: apiData.name,
-      nameSi: apiData.name_si,
-      nameTa: apiData.name_ta,
-      areaSqKm: apiData.area_sqkm,
-      centerLatLng:
-        apiData.center_lat && apiData.center_lon
-          ? { lat: apiData.center_lat, lng: apiData.center_lon }
-          : null,
+      id: data["id"],
+      name: data["name"],
+      areaSqKm: parseFloat(data["area_sqkm"]),
+      centerLatLng: new LatLng(
+        parseFloat(data["center_lat"]),
+        parseFloat(data["center_lng"]),
+      ),
     });
   }
 
@@ -68,7 +52,7 @@ export default class AbstractRegion {
     const url = this.url;
     try {
       const data = await WWW.fetchTSV(url);
-      const regions = data.map((item) => this.fromAPIObject(item));
+      const regions = data.map((item) => this.fromObject(item));
       return regions;
     } catch (error) {
       console.error(`Error fetching ${this.regionName}s:`, error);

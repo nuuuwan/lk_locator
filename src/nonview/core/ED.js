@@ -1,6 +1,6 @@
-import AbstractLegacyRegion from "./AbstractLegacyRegion";
+import AbstractRegion from "./AbstractRegion";
 
-export default class District extends AbstractLegacyRegion {
+export default class District extends AbstractRegion {
   static get regionName() {
     return "Electoral District";
   }
