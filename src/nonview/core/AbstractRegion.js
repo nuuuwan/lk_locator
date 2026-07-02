@@ -27,7 +27,7 @@ export default class AbstractRegion {
     return this.constructor.regionShortName;
   }
 
-  static fromObject(data) {
+  static fromRawData(data) {
     return new this({
       id: data["id"],
       name: data["name"],
@@ -36,6 +36,7 @@ export default class AbstractRegion {
         parseFloat(data["center_lat"]),
         parseFloat(data["center_lng"]),
       ),
+      rawData: data,
     });
   }
 
@@ -52,7 +53,7 @@ export default class AbstractRegion {
     const url = this.url;
     try {
       const data = await WWW.fetchTSV(url);
-      const regions = data.map((item) => this.fromObject(item));
+      const regions = data.map((item) => this.fromRawData(item));
       return regions;
     } catch (error) {
       console.error(`Error fetching ${this.regionName}s:`, error);
