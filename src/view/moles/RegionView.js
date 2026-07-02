@@ -21,7 +21,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
 
   let displayName = region?.name;
   if (regionClass.regionShortName === "GND") {
-    const gndNum = gndLegacyData?.gnd_num;
+    const gndNum = region?.num;
     if (gndNum && gndNum !== "None") {
       displayName += ` (${gndNum})`;
     }
@@ -41,7 +41,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
         "&:hover": {
           bgcolor: isSelected ? "primary.main" : "primary.main",
         },
-        height: 48,
+        height: 60,
         maxWidth: "48vw",
       }}
       disabled={!region}
@@ -68,7 +68,7 @@ export default function RegionView({ region, regionClass, regionGeo }) {
             variant="caption"
             sx={{
               fontSize: "0.6rem",
-              color: isSelected ? "grey.75" : "black",
+              color: "black",
             }}
           >
             {regionClass.regionName}
