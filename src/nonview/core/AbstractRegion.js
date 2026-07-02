@@ -76,7 +76,8 @@ export default class AbstractRegion {
     return (
       `https://raw.githubusercontent.com` +
       `/nuuuwan/lk_admin_regions/refs/heads/main` +
-      `/data/geo/json/original/${regionShortName}s.json/${this.id}.json`
+      `/data/geo/json/original` +
+      `/${regionShortName.toLowerCase()}s.json/${this.id}.json`
     );
   }
 

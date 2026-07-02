@@ -1,6 +1,6 @@
 import AbstractRegion from "./AbstractRegion";
 
-export default class District extends AbstractRegion {
+export default class LG extends AbstractRegion {
   static get regionName() {
     return "Local Authority";
   }
