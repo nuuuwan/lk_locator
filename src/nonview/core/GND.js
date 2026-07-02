@@ -24,4 +24,16 @@ export default class GND extends AbstractRegion {
     const idx = Object.fromEntries(data.map((d) => [d.gnd_id, d]));
     return idx;
   }
+
+  get edID() {
+    return this.rawData["ed_id"];
+  }
+
+  get pdID() {
+    return this.rawData["pd_id"];
+  }
+
+  get lgID() {
+    return this.rawData["lg_id"];
+  }
 }
